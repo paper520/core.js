@@ -1,10 +1,11 @@
 {
   "name": "@yelloxing/core.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "🐠 A modern JavaScript utility library delivering modularity, performance, &amp; extras.",
-  "main": "index.js",
+  "main": "core.js",
+  "sideEffects": false,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "node ./scripts/postinstall.js || echo \"ignore\""
   },
   "repository": {
     "type": "git",
