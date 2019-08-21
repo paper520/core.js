@@ -1,0 +1,24 @@
+{
+  "name": "@yelloxing/core.js",
+  "version": "0.0.0",
+  "description": "🐠 A modern JavaScript utility library delivering modularity, performance, &amp; extras.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yelloxing/core.js.git"
+  },
+  "keywords": [
+    "core",
+    "es",
+    "render"
+  ],
+  "author": "心叶",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yelloxing/core.js/issues"
+  },
+  "homepage": "https://github.com/yelloxing/core.js#readme"
+}
