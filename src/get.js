@@ -25,6 +25,6 @@ import baseGet from './.inner/baseGet';
  */
 
 export default function get(object, path, defaultValue) {
-    var result = object === null ? undefined : baseGet(object, path);
+    let result = object === null ? undefined : baseGet(object, path);
     return result === undefined ? defaultValue : result;
 };

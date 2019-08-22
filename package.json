@@ -2,9 +2,13 @@
   "name": "@yelloxing/core.js",
   "version": "0.1.0",
   "description": "🐠 A modern JavaScript utility library delivering modularity, performance, &amp; extras.",
-  "main": "core.js",
+  "main": "dist/core.min.js",
   "sideEffects": false,
   "scripts": {
+    "build": "npm run build:bundle && npm run build:babel && npm run build:uglify",
+    "build:bundle": "rollup src/core.js --file dist/core.es5+.js --format iife --name 'bundle'",
+    "build:babel": "npx babel dist/core.es5+.js --out-file dist/core.js",
+    "build:uglify": "uglifyjs dist/core.js -o dist/core.min.js",
     "postinstall": "node ./scripts/postinstall.js || echo \"ignore\""
   },
   "repository": {
@@ -21,5 +25,12 @@
   "bugs": {
     "url": "https://github.com/yelloxing/core.js/issues"
   },
-  "homepage": "https://github.com/yelloxing/core.js#readme"
+  "homepage": "https://github.com/yelloxing/core.js#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "rollup": "^1.20.0",
+    "uglify-js": "^3.6.0"
+  }
 }
