@@ -10,7 +10,7 @@
 
 In a browser:
 ```html
-<script src="core.js"></script>
+<script src="./dist/core.js"></script>
 ```
 
 use:
