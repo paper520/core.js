@@ -8,6 +8,16 @@
 
 ## Installation
 
+In a browser:
+```html
+<script src="core.js"></script>
+```
+
+use:
+```js
+__.XXX();
+```
+
 Using npm:
 ```shell
 $ npm i @yelloxing/core.js
@@ -16,7 +26,7 @@ $ npm i @yelloxing/core.js
 Note: add --save if you are using npm < 5.0.0
 
 ```js
-var __ = require('@yelloxing/core.js');
+const __ = require('@yelloxing/core.js');
 ```
 
 or
