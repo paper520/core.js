@@ -17,6 +17,7 @@ import baseSet from './.inner/baseSet';
  * set(object,'a.b.c',10)
  * // {a:{b:[1,2,3]}}
  */
-export default function(object, path, value, customizer) {
-
+export default function (object, path, value, customizer) {
+    customizer = typeof customizer == 'function' ? customizer : undefined;
+    return object == null ? object : baseSet(object, path, value, customizer);
 };

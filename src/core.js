@@ -1,10 +1,21 @@
+// 类型判断
+import isSymbol from './isSymbol';
+import isObject from './isObject';
+
+// 对象方法
 import set from './set';
 import get from './get';
 
+// 值判断
+import eq from './eq';
+
 let __ = {
 
-    // 对象属性设置和获取值
-    set, get
+    set, get,
+
+    isSymbol, isObject,
+
+    eq
 
 };
 

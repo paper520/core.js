@@ -37,6 +37,21 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return type == 'symbol' || type == 'object' && value != null && getType(value) == '[object Symbol]';
   }
   /**
+   * 判断一个值是不是Object。
+   *
+   * @since Fri Aug 23 2019 GMT+0800
+   * @public
+   * @param {*} value 需要判断类型的值
+   * @returns {boolean} 如果是Object返回true，否则返回false
+   */
+
+
+  function isObject(value) {
+    var type = _typeof(value);
+
+    return value != null && (type == 'object' || type == 'function');
+  }
+  /**
    * 判断是不是一个对象上的属性
    *
    * @private
@@ -89,6 +104,137 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return isKey(value, object) ? [value] : stringToPath(value);
   }
   /**
+   * 设置值的基本方法（没有进行值检查）
+   *
+   * @private
+   * @param {Object} object 设置的对象
+   * @param {string} key 需要设置的属性
+   * @param {*} value 设置的值
+   */
+
+
+  function baseAssignValue(object, key, value) {
+    if (key == '__proto__') {
+      Object.defineProperty(object, key, {
+        'configurable': true,
+        'enumerable': true,
+        'value': value,
+        'writable': true
+      });
+    } else {
+      object[key] = value;
+    }
+  }
+  /**
+   * 比较二个值是否相等
+   *
+   * @since Fri Aug 23 2019 GMT+0800
+   * @public
+   * @param {*} value 需要比较的值1
+   * @param {*} other 需要比较的值2
+   * @returns {boolean} 如果相等返回true，否则返回false
+   * @example
+   *
+   * const object = { 'a': 1 }
+   * const other = { 'a': 1 }
+   *
+   * eq(object, object)
+   * // => true
+   *
+   * eq(object, other)
+   * // => false
+   *
+   * eq('a', 'a')
+   * // => true
+   *
+   * eq('a', Object('a'))
+   * // => false
+   *
+   * eq(NaN, NaN)
+   * // => true
+   */
+
+
+  function eq(value, other) {
+    // 主要是考虑到NaN!==NaN
+    return value === other || value !== value && other !== other;
+  }
+  /**
+   *设置对象的值
+   *
+   * @private
+   * @param {Object} object 设置的对象
+   * @param {string} key 需要设置的属性
+   * @param {*} value 设置的值
+   */
+
+
+  function assignValue(object, key, value) {
+    var objValue = object[key];
+
+    if (!eq(objValue, value)) {
+      baseAssignValue(object, key, value);
+    }
+  }
+
+  var INFINITY = 1 / 0;
+  /**
+   * 如果value不是字符串或者symbol，就变成字符串
+   *
+   * @private
+   * @param {*} value 需要检查的值
+   * @returns {string|symbol} 返回key
+   */
+
+  function toKey(value) {
+    if (typeof value === 'string' || isSymbol(value)) {
+      return value;
+    }
+
+    var result = "".concat(value);
+    return result === '0' && 1 / value === -INFINITY ? "-0" : result;
+  }
+  /**
+   * 设置一个对象属性值的基础方法。
+   *
+   * @private
+   * @param {Object} object 设置的对象
+   * @param {Array|string} path 对象上设置值的路径
+   * @param {*} value 设置的值
+   * @param {*} customizer 可选，一个函数，用于返回补充的类型（比如[],{}等）
+   * @returns {Object} 返回一个对象
+   */
+
+
+  function baseSet(object, path, value, customizer) {
+    if (!isObject(object)) {
+      return object;
+    }
+
+    path = castPath(path, object);
+    var nested = object;
+
+    for (var index = 0; index < path.length; index++) {
+      var key = toKey(path[index]);
+      var newValue = value; // 如果不是最后一个，需要一些检测
+
+      if (index + 1 != path.length) {
+        var objValue = nested[key]; // 可能有的时候，原来的对象层次不足，需要补充，这里是选择应该补充什么类型
+
+        if (!isObject(objValue)) {
+          newValue = customizer ? customizer(objValue, key, nested) : {};
+        } else {
+          newValue = objValue;
+        }
+      }
+
+      assignValue(nested, key, newValue);
+      nested = nested[key];
+    }
+
+    return object;
+  }
+  /**
    * 设置object的属性path的新值，返回设置后的对象。
    *
    * @since Fri Aug 23 2019 GMT+0800
@@ -107,24 +253,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
    */
 
 
-  function set(object, path, value, customizer) {}
-
-  var INFINITY = 1 / 0;
-  /**
-   * 如果value不是字符串或者symbol，就变成字符串
-   *
-   * @private
-   * @param {*} value 需要检查的值
-   * @returns {string|symbol} 返回key
-   */
-
-  function toKey(value) {
-    if (typeof value === 'string' || isSymbol(value)) {
-      return value;
-    }
-
-    var result = "".concat(value);
-    return result === '0' && 1 / value === -INFINITY ? "-0" : result;
+  function set(object, path, value, customizer) {
+    customizer = typeof customizer == 'function' ? customizer : undefined;
+    return object == null ? object : baseSet(object, path, value, customizer);
   }
   /**
    * 获取一个对象属性值的基础方法，没有默认值。
@@ -176,12 +307,15 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   function get(object, path, defaultValue) {
     var result = object === null ? undefined : baseGet(object, path);
     return result === undefined ? defaultValue : result;
-  }
+  } // 类型判断
+
 
   var __ = {
-    // 对象属性设置和获取值
     set: set,
-    get: get
+    get: get,
+    isSymbol: isSymbol,
+    isObject: isObject,
+    eq: eq
   }; // 判断当前环境，如果不是浏览器环境
 
   if ((typeof module === "undefined" ? "undefined" : _typeof(module)) === "object" && _typeof(module.exports) === "object") {
