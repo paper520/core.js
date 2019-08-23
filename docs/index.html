@@ -7,17 +7,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="core.js.png">
     <title>文档 | core.js</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function togger(target){
+            if(target.getAttribute('class')=='open'){
+                target.setAttribute('class','close');
+            }else{
+                target.setAttribute('class','open');
+            }
+        }
+    </script>
 </head>
 
 <body>
+    <div class="header">
+        <h2>@yelloxing/core.js</h2>
+        JavaScript核心接口加强 | alpha内测阶段
+    </div>
+    <div class='menu'>
 
-    <h2>
-        特别提示:
-    </h2>
-    <p>
-        本项目目前处于开发阶段，敬请期待（本项目主要用于提供JS开发中常用的核心接口扩展和优化）！
-    </p>
-    <img src="core.js.png">
+        <p>
+            <h4 class='open' onclick='togger(this)'>Object</h4>
+            <ul>
+                <li>__.get</li>
+                <li>__.set</li>
+            </ul>
+        </p>
+        <p>
+            <h4 class='close' onclick='togger(this)'>Lang</h4>
+            <ul>
+                <li>__.eq</li>
+                <li>__.isObject</li>
+                <li>__.isSymbol</li>
+            </ul>
+        </p>
+    </div>
+    <div class='content'>
+        <h4>”Object“ 方法</h4>
+
+        <h4>”Lang“ 方法</h4>
+    </div>
 
 </body>
 
