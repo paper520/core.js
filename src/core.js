@@ -3,7 +3,7 @@ import get from './get';
 
 let __ = {
 
-    // JSON或数组的设置和获取值
+    // 对象属性设置和获取值
     set, get
 
 };
@@ -32,5 +32,5 @@ else {
 
     };
     // 挂载库对象到根
-    window.__  = __;
+    window.__ = __;
 }
