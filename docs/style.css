@@ -347,3 +347,9 @@ h5 {
     z-index: 2;
     font-family: sans-serif;
 }
+
+.content p a {
+    color: blue;
+    text-decoration: underline;
+    margin: 0 .05rem;
+}

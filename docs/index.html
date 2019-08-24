@@ -118,8 +118,12 @@
         <h4>”Lang“ 方法</h4>
         <pre class='prettyprint lang-js' id='eq'>__.eq(value, other);</pre>
         <p>
-            比较两者的值，来确定它们是否相等(这里规定NaN == NaN)。
+            比较两者的值，来确定它们是否相等(这里遵循
+            <a href='http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero' target="_blank">SameValueZero</a>规则)。
         </p>
+        <h5>
+            参数
+        </h5>
         <ul>
             <li>
                 <em>value (*)</em>: 要比较的值。
@@ -138,7 +142,7 @@
         </ul>
         <pre class='prettyprint lang-js' id='isObject'>__.isObject(value);</pre>
         <p>
-            检查 value 是否为一个对象。 (例如： arrays, functions, objects, regexes,new Number(0), 以及 new String(''))
+            检查 value 是否为一个对象。
         </p>
         <h5>
             参数
