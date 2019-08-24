@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="prettify.css">
     <script src="prettify.js"></script>
     <script>
+        function adjustScroll() {
+            window.setTimeout(function () {
+                document.getElementById('content').scrollTop -= 90;
+            }, 100);
+        };
         function togger(target) {
             if (target.getAttribute('class') == 'close') {
                 target.setAttribute('class', 'open');
@@ -19,34 +24,40 @@
                 target.setAttribute('class', 'close');
             }
         }
+        function toItem(target) {
+            window.location.href = "#" + target;
+            adjustScroll();
+        }
     </script>
 </head>
 
-<body onload="prettyPrint()">
+<body onload="prettyPrint();adjustScroll();">
+    <a href="https://github.com/yelloxing/core.js" class="github" target="_blank">
+        Fork me on Github
+    </a>
     <div class="header">
         <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>@yelloxing/core.js</h2>
-        JavaScript核心接口加强 | alpha内测阶段
+        JavaScript核心接口
     </div>
     <div class='menu'>
-
         <p>
             <h4 onclick='togger(this)'>Object</h4>
             <ul>
-                <li onclick='window.location.href="#get"'>__.get</li>
-                <li onclick='window.location.href="#set"'>__.set</li>
+                <li onclick='toItem("get")'>__.get</li>
+                <li onclick='toItem("set")'>__.set</li>
             </ul>
         </p>
         <p>
             <h4 onclick='togger(this)'>Lang</h4>
             <ul>
-                <li onclick='window.location.href="#eq"'>__.eq</li>
-                <li onclick='window.location.href="#isObject"'>__.isObject</li>
-                <li onclick='window.location.href="#isSymbol"'>__.isSymbol</li>
+                <li onclick='toItem("eq")'>__.eq</li>
+                <li onclick='toItem("isObject")'>__.isObject</li>
+                <li onclick='toItem("isSymbol")'>__.isSymbol</li>
             </ul>
         </p>
     </div>
 
-    <div class='content'>
+    <div class='content' id='content'>
         <h4>”Object“ 方法</h4>
         <pre class='prettyprint lang-js' id='get'>__.get(object, path, [defaultValue]);</pre>
         <p>
