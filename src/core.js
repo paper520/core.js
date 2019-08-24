@@ -1,6 +1,13 @@
 // 类型判断
 import isSymbol from './isSymbol';
 import isObject from './isObject';
+import isBoolean from './isBoolean';
+import isElement from './isElement';
+import isFunction from './isFunction';
+import isNull from './isNull';
+import isNumber from './isNumber';
+import isString from './isString';
+import isUndefined from './isUndefined';
 
 // 对象方法
 import set from './set';
@@ -13,7 +20,8 @@ let __ = {
 
     set, get,
 
-    isSymbol, isObject,
+    isSymbol, isObject, isBoolean, isElement, isFunction,
+    isNull, isNumber, isString, isUndefined,
 
     eq
 

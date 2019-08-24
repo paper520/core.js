@@ -12,7 +12,7 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Sat Aug 24 2019 15:03:38 GMT+0800 (GMT+08:00)
+* Date:Sat Aug 24 2019 16:03:57 GMT+0800 (GMT+08:00)
 */
 
 (function () {
@@ -58,6 +58,129 @@
     function isObject (value) {
         const type = typeof value;
         return value != null && (type == 'object' || type == 'function');
+    }
+
+    /**
+     * 判断一个值是不是Boolean。
+     *
+     * @since Sat Aug 24 2019 GMT+0800
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是Boolean返回true，否则返回false
+     */
+    function isBoolean (value) {
+        return value === true || value === false ||
+            (value !== null && typeof value === 'object' && getType(value) == '[object Boolean]');
+    }
+
+    /**
+     * 判断一个值是不是一个朴素的'对象'
+     *
+     * @private
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是朴素的'对象'返回true，否则返回false
+     */
+
+    function isPlainObject (value) {
+        if (value === null || typeof value !== 'object' || getType(value) != '[object Object]') {
+            return false;
+        }
+
+        // 如果原型为null
+        if (Object.getPrototypeOf(value) === null) {
+            return true;
+        }
+
+        let proto = value;
+        while (Object.getPrototypeOf(proto) !== null) {
+            proto = Object.getPrototypeOf(proto);
+        }
+        return Object.getPrototypeOf(value) === proto;
+    }
+
+    /**
+     * 判断一个值是不是结点元素。
+     *
+     * @since Sat Aug 24 2019 GMT+0800
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是结点元素返回true，否则返回false
+     */
+    function isElement (value) {
+        return value !== null && typeof value === 'object' &&
+            (value.nodeType === 1 || value.nodeType === 9 || value.nodeType === 11) &&
+            !isPlainObject(value);
+    }
+
+    /**
+     * 判断一个值是不是Function。
+     *
+     * @since Sat Aug 24 2019 GMT+0800
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是Function返回true，否则返回false
+     */
+    function isFunction (value) {
+        if (!isObject(value)) {
+            return false;
+        }
+
+        const type = getType(value);
+        return type == '[object Function]' || type == '[object AsyncFunction]' ||
+            type == '[object GeneratorFunction]' || type == '[object Proxy]';
+    }
+
+    /**
+     * 判断一个值是不是Null。
+     *
+     * @since Sat Aug 24 2019 GMT+0800
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是Null返回true，否则返回false
+     */
+    function isNull (value) {
+        return value === null;
+    }
+
+    /**
+     * 判断一个值是不是Number。
+     *
+     * @since Sat Aug 24 2019 GMT+0800
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是Number返回true，否则返回false
+     */
+    function isNumber (value) {
+
+        // 基本类型
+        return typeof value === 'number' ||
+            // 对象类型
+            (value !== null && typeof value === 'object' && getType(value) == '[object Number]');
+    }
+
+    /**
+     * 判断一个值是不是String。
+     *
+     * @since Sat Aug 24 2019 GMT+0800
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是String返回true，否则返回false
+     */
+    function isString (value) {
+        const type = typeof value;
+        return type == 'string' || (type == 'object' && value != null && !Array.isArray(value) && getType(value) == '[object String]');
+    }
+
+    /**
+     * 判断一个值是不是Undefined。
+     *
+     * @since Sat Aug 24 2019 GMT+0800
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是Undefined返回true，否则返回false
+     */
+    function isUndefined (value) {
+        return value === undefined;
     }
 
     /**
@@ -319,7 +442,8 @@
 
         set, get,
 
-        isSymbol, isObject,
+        isSymbol, isObject, isBoolean, isElement, isFunction,
+        isNull, isNumber, isString, isUndefined,
 
         eq
 
