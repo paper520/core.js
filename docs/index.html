@@ -8,44 +8,163 @@
     <link rel="shortcut icon" href="core.js.png">
     <title>文档 | core.js</title>
     <link rel="stylesheet" href="style.css">
+    <!-- 代码格式化 -->
+    <link rel="stylesheet" href="prettify.css">
+    <script src="prettify.js"></script>
     <script>
-        function togger(target){
-            if(target.getAttribute('class')=='open'){
-                target.setAttribute('class','close');
-            }else{
-                target.setAttribute('class','open');
+        function togger(target) {
+            if (target.getAttribute('class') == 'close') {
+                target.setAttribute('class', 'open');
+            } else {
+                target.setAttribute('class', 'close');
             }
         }
     </script>
 </head>
 
-<body>
+<body onload="prettyPrint()">
     <div class="header">
-        <h2>@yelloxing/core.js</h2>
+        <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>@yelloxing/core.js</h2>
         JavaScript核心接口加强 | alpha内测阶段
     </div>
     <div class='menu'>
 
         <p>
-            <h4 class='open' onclick='togger(this)'>Object</h4>
+            <h4 onclick='togger(this)'>Object</h4>
             <ul>
-                <li>__.get</li>
-                <li>__.set</li>
+                <li onclick='window.location.href="#get"'>__.get</li>
+                <li onclick='window.location.href="#set"'>__.set</li>
             </ul>
         </p>
         <p>
-            <h4 class='close' onclick='togger(this)'>Lang</h4>
+            <h4 onclick='togger(this)'>Lang</h4>
             <ul>
-                <li>__.eq</li>
-                <li>__.isObject</li>
-                <li>__.isSymbol</li>
+                <li onclick='window.location.href="#eq"'>__.eq</li>
+                <li onclick='window.location.href="#isObject"'>__.isObject</li>
+                <li onclick='window.location.href="#isSymbol"'>__.isSymbol</li>
             </ul>
         </p>
     </div>
+
     <div class='content'>
         <h4>”Object“ 方法</h4>
-
+        <pre class='prettyprint lang-js' id='get'>__.get(object, path, [defaultValue]);</pre>
+        <p>
+            根据 object对象的path路径获取值。 如果解析 value 是 undefined 会以 defaultValue 取代。
+        </p>
+        <h5>参数</h5>
+        <ul>
+            <li>
+                <em>object (Object)</em>: 要检索的对象。
+            </li>
+            <li>
+                <em>path (Array|string)</em>: 要获取属性的路径。
+            </li>
+            <li>
+                <em>[defaultValue] (*)</em>: 如果解析值是
+                <em>undefined</em>，这值会被返回。
+            </li>
+        </ul>
+        <h5>返回</h5>
+        <ul>
+            <li>
+                <em>(*)</em>: 返回解析的值。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='set'>__.set(object, path, value, [customizer]);</pre>
+        <p>
+            设置 object对象中对应 path 属性路径上的值，如果path不存在，则创建。它接受一个 customizer，调用生成对象的 path。 如果 customizer 返回 undefined 将会使用{}代替。customizer 调用3个参数：
+            (nsValue, key, nsObject)。
+        </p>
+        <p class='warn'>
+            注意: 这个方法会改变 object.
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>object (Object)</em>: 要修改的对象。
+            </li>
+            <li>
+                <em>path (Array|string)</em>: 要设置的对象路径。
+            </li>
+            <li>
+                <em>value (*)</em>: 要设置的值。
+            </li>
+            <li>
+                <em>[customizer] (Function)</em>: 这个函数用来定制分配的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(Object)</em>: 返回 object。
+            </li>
+        </ul>
         <h4>”Lang“ 方法</h4>
+        <pre class='prettyprint lang-js' id='eq'>__.eq(value, other);</pre>
+        <p>
+            比较两者的值，来确定它们是否相等(这里规定NaN == NaN)。
+        </p>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要比较的值。
+            </li>
+            <li>
+                <em>other (*)</em>: 另一个要比较的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果两个值相等返回 true ，否则返回 false 。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isObject'>__.isObject(value);</pre>
+        <p>
+            检查 value 是否为一个对象。 (例如： arrays, functions, objects, regexes,new Number(0), 以及 new String(''))
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个对象，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isSymbol'>__.isSymbol(value);</pre>
+        <p>
+            检查 value 是否是原始 Symbol 或者对象。
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个symbol，那么返回 true，否则返回 false。
+            </li>
+        </ul>
     </div>
 
 </body>
