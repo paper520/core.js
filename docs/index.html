@@ -54,17 +54,18 @@
                 <li onclick='toItem("eq")'>__.eq</li>
                 <li onclick='toItem("isObject")'>__.isObject</li>
                 <li onclick='toItem("isSymbol")'>__.isSymbol</li>
+                <li onclick='toItem("isBoolean")'>__.isBoolean</li>
+                <li onclick='toItem("isElement")'>__.isElement</li>
+                <li onclick='toItem("isFunction")'>__.isFunction</li>
+                <li onclick='toItem("isNull")'>__.isNull</li>
+                <li onclick='toItem("isNumber")'>__.isNumber</li>
+                <li onclick='toItem("isString")'>__.isString</li>
+                <li onclick='toItem("isUndefined")'>__.isUndefined</li>
             </ul>
         </p>
     </div>
 
     <div class='content' id='content'>
-        <div class="cursor">
-            <a href="https://github.com/yelloxing/core.js" target="_blank">源码</a>
-            <a href="https://yelloxing.github.io/core.js/" target="_blank">文档</a>
-            <a href="https://github.com/yelloxing/core.js/issues" target="_blank">交流</a>
-            <a href="./core.current.js" download="core.js">下载</a>
-        </div>
         <h4>”Object“ 方法</h4>
         <pre class='prettyprint lang-js' id='get'>__.get(object, path, [defaultValue]);</pre>
         <p>
@@ -185,6 +186,149 @@
         <ul>
             <li>
                 <em>(boolean)</em>: 如果 value 为一个symbol，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isBoolean'>__.isBoolean(value);</pre>
+        <p>
+            检查 value 是否是原始 boolean 类型或者对象。
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个boolean，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isElement'>__.isElement(value);</pre>
+        <p>
+            检查 value 是否是DOM 元素。
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个DOM元素，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isFunction'>__.isFunction(value);</pre>
+        <p>
+            检查 value 是否是 Function 对象。
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个Function，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isNull'>__.isNull(value);</pre>
+        <p>
+            检查 value 是否是 Null。
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个Null，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isNumber'>__.isNumber(value);</pre>
+        <p>
+            检查 value 是否是原始Number数值型 或者 对象。
+        </p>
+        <p class="warn">
+            Infinity, -Infinity, 以及 NaN 也是数字。
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个Number，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isString'>__.isString(value);</pre>
+        <p>
+            检查 value 是否是原始字符串String或者对象。
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个字符串，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isUndefined'>__.isUndefined(value);</pre>
+        <p>
+            检查 value 是否是 undefined。
+        </p>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个undefined，那么返回 true，否则返回 false。
             </li>
         </ul>
     </div>
