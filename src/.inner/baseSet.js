@@ -32,7 +32,11 @@ export default function (object, path, value, customizer) {
 
             // 可能有的时候，原来的对象层次不足，需要补充，这里是选择应该补充什么类型
             if (!isObject(objValue)) {
-                newValue = customizer ? customizer(objValue, key, nested) : {};
+
+                newValue = customizer ? customizer(objValue, key, nested) : undefined;
+                if (newValue === undefined) {
+                    newValue = {};
+                }
             } else {
                 newValue = objValue;
             }

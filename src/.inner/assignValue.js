@@ -12,8 +12,5 @@ const hasOwnProperty = Object.prototype.hasOwnProperty;
  * @param {*} value 设置的值
  */
 export default function (object, key, value) {
-    const objValue = object[key];
-    if (!eq(objValue, value)) {
-        baseAssignValue(object, key, value);
-    }
+    baseAssignValue(object, key, value);
 };

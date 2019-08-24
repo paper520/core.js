@@ -1,3 +1,20 @@
+
+/*!
+* @yelloxing/core.js - 🐠 A modern JavaScript utility library delivering modularity, performance, &amp; extras.
+* git+https://github.com/yelloxing/core.js.git
+*
+* author 心叶
+*
+* version 0.1.0-alpha
+*
+* build Wed Aug 21 2019
+*
+* Copyright yelloxing
+* Released under the MIT license
+*
+* Date:Sat Aug 24 2019 14:20:32 GMT+0800 (GMT+08:00)
+*/
+
 "use strict";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -170,11 +187,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
   function assignValue(object, key, value) {
-    var objValue = object[key];
-
-    if (!eq(objValue, value)) {
-      baseAssignValue(object, key, value);
-    }
+    baseAssignValue(object, key, value);
   }
 
   var INFINITY = 1 / 0;
@@ -222,7 +235,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var objValue = nested[key]; // 可能有的时候，原来的对象层次不足，需要补充，这里是选择应该补充什么类型
 
         if (!isObject(objValue)) {
-          newValue = customizer ? customizer(objValue, key, nested) : {};
+          newValue = customizer ? customizer(objValue, key, nested) : undefined;
+
+          if (newValue === undefined) {
+            newValue = {};
+          }
         } else {
           newValue = objValue;
         }
