@@ -24,6 +24,9 @@ fs.readdirSync('./dist').forEach((url) => {
     const temp = fs.readFileSync(url);
     fs.writeFileSync(url, banner);
     fs.appendFileSync(url, temp);
+
+    if (/\.min\./.test(url)) {
+        fs.writeFileSync('./docs/core.current.js', banner);
+        fs.appendFileSync('./docs/core.current.js', temp);
+    }
 });
-
-
