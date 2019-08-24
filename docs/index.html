@@ -12,27 +12,10 @@
     <!-- 代码格式化 -->
     <link rel="stylesheet" href="prettify.css">
     <script src="prettify.js"></script>
-    <script>
-        function adjustScroll() {
-            window.setTimeout(function () {
-                document.getElementById('content').scrollTop -= 90;
-            }, 100);
-        };
-        function togger(target) {
-            if (target.getAttribute('class') == 'close') {
-                target.setAttribute('class', 'open');
-            } else {
-                target.setAttribute('class', 'close');
-            }
-        }
-        function toItem(target) {
-            window.location.href = "#" + target;
-            adjustScroll();
-        }
-    </script>
+    <script src="script.js"></script>
 </head>
 
-<body onload="prettyPrint();adjustScroll();">
+<body onload="prettyPrint();adjustScroll();initMenus();">
     <a href="https://github.com/yelloxing/core.js" class="github" target="_blank">
         Fork me on Github
     </a>
@@ -40,15 +23,19 @@
         <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>@yelloxing/core.js</h2>
         JavaScript核心接口
     </div>
-    <div class='menu'>
-        <p>
+    <div class='menu' id='menu'>
+        <div class="search">
+            <i></i>
+            <input type="text" placeholder="Type to filter" oninput='doSearch(this.value)'>
+        </div>
+        <div name='menu-frame'>
             <h4 onclick='togger(this)'>Object</h4>
             <ul>
                 <li onclick='toItem("get")'>__.get</li>
                 <li onclick='toItem("set")'>__.set</li>
             </ul>
-        </p>
-        <p>
+        </div>
+        <div name='menu-frame'>
             <h4 onclick='togger(this)'>Lang</h4>
             <ul>
                 <li onclick='toItem("eq")'>__.eq</li>
@@ -62,7 +49,7 @@
                 <li onclick='toItem("isString")'>__.isString</li>
                 <li onclick='toItem("isUndefined")'>__.isUndefined</li>
             </ul>
-        </p>
+        </div>
     </div>
 
     <div class='content' id='content'>

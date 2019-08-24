@@ -249,7 +249,8 @@ body {
 }
 
 .menu h4 {
-    font-size: .14rem;
+    font-size: .2rem;
+    font-weight: 800;
     line-height: 3em;
     padding-left: .1rem;
     cursor: pointer;
@@ -352,4 +353,42 @@ h5 {
     color: blue;
     text-decoration: underline;
     margin: 0 .05rem;
+}
+
+.menu .search {
+    position: relative;
+    padding: .2rem 0;
+}
+
+.menu .search i {
+    position: absolute;
+    color: #979797;
+    font-size: .15rem;
+    left: 7px;
+    font-family: iconFont;
+    top: 25px;
+    font-style: normal;
+}
+
+.menu .search i::before {
+    content: "\f002";
+}
+
+.menu .search input {
+    outline: none;
+    border: none;
+    width: 100%;
+    line-height: 2em;
+    height: 2em;
+    font-size: .16rem;
+    padding-left: .3rem;
+    border-bottom: 2px solid #c5c5c5;
+}
+
+.menu .search input:focus {
+    border-bottom-color: #5f5f5f;
+}
+
+.hidden {
+    display: none;
 }
