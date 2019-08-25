@@ -1,4 +1,4 @@
-import getType from './.inner/getType';
+import getType from '../.inner/getType';
 import isObject from './isObject';
 
 /**

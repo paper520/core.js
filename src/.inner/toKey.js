@@ -1,4 +1,4 @@
-import isSymbol from "../isSymbol";
+import isSymbol from "../Lang/isSymbol";
 
 const INFINITY = 1 / 0;
 

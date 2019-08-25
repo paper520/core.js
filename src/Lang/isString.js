@@ -1,4 +1,4 @@
-import getType from './.inner/getType';
+import getType from '../.inner/getType';
 
 /**
  * 判断一个值是不是String。

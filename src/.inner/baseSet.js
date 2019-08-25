@@ -1,5 +1,5 @@
 import castPath from './castPath';
-import isObject from '../isObject';
+import isObject from '../Lang/isObject';
 import assignValue from './assignValue';
 import toKey from './toKey';
 

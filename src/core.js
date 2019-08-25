@@ -1,20 +1,20 @@
 // 类型判断
-import isSymbol from './isSymbol';
-import isObject from './isObject';
-import isBoolean from './isBoolean';
-import isElement from './isElement';
-import isFunction from './isFunction';
-import isNull from './isNull';
-import isNumber from './isNumber';
-import isString from './isString';
-import isUndefined from './isUndefined';
+import isSymbol from './Lang/isSymbol';
+import isObject from './Lang/isObject';
+import isBoolean from './Lang/isBoolean';
+import isElement from './Lang/isElement';
+import isFunction from './Lang/isFunction';
+import isNull from './Lang/isNull';
+import isNumber from './Lang/isNumber';
+import isString from './Lang/isString';
+import isUndefined from './Lang/isUndefined';
 
 // 对象方法
-import set from './set';
-import get from './get';
+import set from './Object/set';
+import get from './Object/get';
 
 // 值判断
-import eq from './eq';
+import eq from './Lang/eq';
 
 let __ = {
 

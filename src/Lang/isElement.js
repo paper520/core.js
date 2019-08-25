@@ -1,4 +1,4 @@
-import isPlainObject from './.inner/isPlainObject';
+import isPlainObject from '../.inner/isPlainObject';
 
 /**
  * 判断一个值是不是结点元素。

@@ -1,4 +1,4 @@
-import baseGet from './.inner/baseGet';
+import baseGet from '../.inner/baseGet';
 
 /**
  * 获取object的属性path的值。如果返回的值是undefined，

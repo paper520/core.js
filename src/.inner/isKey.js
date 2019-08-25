@@ -1,4 +1,4 @@
-import isSymbol from '../isSymbol';
+import isSymbol from '../Lang/isSymbol';
 
 /**
  * 判断是不是一个对象上的属性

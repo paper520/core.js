@@ -1,4 +1,4 @@
-import baseSet from './.inner/baseSet';
+import baseSet from '../.inner/baseSet';
 
 /**
  * 设置object的属性path的新值，返回设置后的对象。
