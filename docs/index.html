@@ -49,7 +49,14 @@
                 <li onclick='toItem("isNumber")'>__.isNumber</li>
                 <li onclick='toItem("isString")'>__.isString</li>
                 <li onclick='toItem("isUndefined")'>__.isUndefined</li>
+                <li onclick='toItem("isDate")'>__.isDate</li>
                 <li onclick='toItem("toString")'>__.toString</li>
+            </ul>
+        </div>
+        <div name='menu-frame'>
+            <h4 onclick='togger(this)'>Date</h4>
+            <ul>
+                <li onclick='toItem("valueOfDate")'>__.valueOfDate</li>
             </ul>
         </div>
     </div>
@@ -417,6 +424,51 @@
         <ul>
             <li>
                 <em>(string)</em>:返回转换后的字符串。
+            </li>
+        </ul>
+        <pre class="prettyprint lang-js" id="isDate">__.isDate(value);</pre>
+        <p>
+            判断一个值是不是Date对象。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sun Aug 25 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个日期对象，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <h4>Date 方法</h4>
+        <pre class='prettyprint lang-js' id='valueOfDate'>__.valueOfDate(value);</pre>
+        <p>
+            获取日期具体的各项值（返回一个JSON）。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sun Aug 25 2019 GMT+0800</li>
+        </ul>
+        <h5>参数</h5>
+        <ul>
+            <li>
+                <em>value (Date)</em>: 需要获取各项值的时间对象。
+            </li>
+        </ul>
+        <h5>返回</h5>
+        <ul>
+            <li>
+                <em>(JSON|undefined)</em>: 返回解析的值（如果不是一个合法的日期对象，返回undefined）。
             </li>
         </ul>
     </div>
