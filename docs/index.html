@@ -43,11 +43,13 @@
                 <li onclick='toItem("isSymbol")'>__.isSymbol</li>
                 <li onclick='toItem("isBoolean")'>__.isBoolean</li>
                 <li onclick='toItem("isElement")'>__.isElement</li>
+                <li onclick='toItem("isText")'>__.isText</li>
                 <li onclick='toItem("isFunction")'>__.isFunction</li>
                 <li onclick='toItem("isNull")'>__.isNull</li>
                 <li onclick='toItem("isNumber")'>__.isNumber</li>
                 <li onclick='toItem("isString")'>__.isString</li>
                 <li onclick='toItem("isUndefined")'>__.isUndefined</li>
+                <li onclick='toItem("toString")'>__.toString</li>
             </ul>
         </div>
     </div>
@@ -58,6 +60,10 @@
         <p>
             根据 object对象的path路径获取值。 如果解析 value 是 undefined 会以 defaultValue 取代。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Fri Aug 23 2019 GMT+0800</li>
+        </ul>
         <h5>参数</h5>
         <ul>
             <li>
@@ -83,8 +89,12 @@
             (nsValue, key, nsObject)。
         </p>
         <p class='warn'>
-            注意: 这个方法会改变 object.
+            这个方法会改变 object.
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Fri Aug 23 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -116,6 +126,10 @@
             比较两者的值，来确定它们是否相等(这里遵循
             <a href='http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero' target="_blank">SameValueZero</a>规则)。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Fri Aug 23 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -139,6 +153,10 @@
         <p>
             检查 value 是否为一个对象。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Fri Aug 23 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -159,6 +177,10 @@
         <p>
             检查 value 是否是原始 Symbol 或者对象。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Fri Aug 23 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -179,6 +201,10 @@
         <p>
             检查 value 是否是原始 boolean 类型或者对象。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -199,6 +225,10 @@
         <p>
             检查 value 是否是DOM 元素。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -215,10 +245,38 @@
                 <em>(boolean)</em>: 如果 value 为一个DOM元素，那么返回 true，否则返回 false。
             </li>
         </ul>
+        <pre class='prettyprint lang-js' id='isText'>__.isText(value);</pre>
+        <p>
+            检查 value 是否是文本结点。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sun Aug 25 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个文本结点，那么返回 true，否则返回 false。
+            </li>
+        </ul>
         <pre class='prettyprint lang-js' id='isFunction'>__.isFunction(value);</pre>
         <p>
             检查 value 是否是 Function 对象。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -239,6 +297,10 @@
         <p>
             检查 value 是否是 Null。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -262,6 +324,10 @@
         <p class="warn">
             Infinity, -Infinity, 以及 NaN 也是数字。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -282,6 +348,10 @@
         <p>
             检查 value 是否是原始字符串String或者对象。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -302,6 +372,10 @@
         <p>
             检查 value 是否是 undefined。
         </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
         <h5>
             参数
         </h5>
@@ -316,6 +390,33 @@
         <ul>
             <li>
                 <em>(boolean)</em>: 如果 value 为一个undefined，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class="prettyprint lang-js" id="toString">__.toString(value);</pre>
+        <p>
+            把一个值转成字符串输出。
+        </p>
+        <p class="warn">
+            针对JSON类型，转义返回的是"[object object]"，而数组返回是友好的，针对JSON后期是否需要调整，目前还在讨论中。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sun Aug 25 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要转换的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(string)</em>:返回转换后的字符串。
             </li>
         </ul>
     </div>

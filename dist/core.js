@@ -12,7 +12,7 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Sun Aug 25 2019 08:58:17 GMT+0800 (GMT+08:00)
+* Date:Sun Aug 25 2019 10:05:11 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
@@ -196,6 +196,61 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return value === undefined;
   }
   /**
+   * 判断一个值是不是文本结点。
+   *
+   * @since Sun Aug 25 2019 GMT+0800
+   * @public
+   * @param {*} value 需要判断类型的值
+   * @returns {boolean} 如果是结点元素返回true，否则返回false
+   */
+
+
+  function isText(value) {
+    return value !== null && _typeof(value) === 'object' && value.nodeType === 3 && !isPlainObject(value);
+  }
+
+  var symbolToString = Symbol.prototype.toString;
+  var INFINITY = 1 / 0;
+  /**
+   * 把一个值变成字符串。
+   *
+   * @since Sun Aug 25 2019 GMT+0800
+   * @public
+   * @param {*} value 需要判断类型的值
+   * @returns {string} 返回转换后的字符串
+   */
+
+  function toString$1(value) {
+    // 如果value是null或者undefined，都返回""
+    if (value == null) {
+      return '';
+    }
+
+    if (typeof value === 'string') {
+      return value;
+    } // 如果是数组，就展开(多层)
+
+
+    if (Array.isArray(value)) {
+      var temp = [];
+
+      for (var i = 0; i < value.length; i++) {
+        // 因为元素也可能是各种类型，递归转换
+        temp[i] = toString$1(value[i]);
+      }
+
+      return "[".concat(temp, "]");
+    }
+
+    if (isSymbol(value)) {
+      return symbolToString ? symbolToString(value) : "";
+    }
+
+    var result = "".concat(value); // 针对数字-0特殊除了，防止变成字符串"0"
+
+    return result === '0' && 1 / value === -INFINITY ? "-0" : result;
+  }
+  /**
    * 判断是不是一个对象上的属性
    *
    * @private
@@ -317,7 +372,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     baseAssignValue(object, key, value);
   }
 
-  var INFINITY = 1 / 0;
+  var INFINITY$1 = 1 / 0;
   /**
    * 如果value不是字符串或者symbol，就变成字符串
    *
@@ -332,7 +387,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
 
     var result = "".concat(value);
-    return result === '0' && 1 / value === -INFINITY ? "-0" : result;
+    return result === '0' && 1 / value === -INFINITY$1 ? "-0" : result;
   }
   /**
    * 设置一个对象属性值的基础方法。
@@ -455,8 +510,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
   var __ = {
-    set: set,
-    get: get,
     isSymbol: isSymbol,
     isObject: isObject,
     isBoolean: isBoolean,
@@ -466,6 +519,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     isNumber: isNumber,
     isString: isString,
     isUndefined: isUndefined,
+    isText: isText,
+    toString: toString$1,
+    set: set,
+    get: get,
     eq: eq
   }; // 判断当前环境，如果不是浏览器环境
 

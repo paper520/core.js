@@ -8,6 +8,10 @@ import isNull from './Lang/isNull';
 import isNumber from './Lang/isNumber';
 import isString from './Lang/isString';
 import isUndefined from './Lang/isUndefined';
+import isText from './Lang/isText';
+
+// 类型转换
+import toString from './Lang/toString';
 
 // 对象方法
 import set from './Object/set';
@@ -18,10 +22,12 @@ import eq from './Lang/eq';
 
 let __ = {
 
-    set, get,
-
     isSymbol, isObject, isBoolean, isElement, isFunction,
-    isNull, isNumber, isString, isUndefined,
+    isNull, isNumber, isString, isUndefined, isText,
+
+    toString,
+
+    set, get,
 
     eq
 

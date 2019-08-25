@@ -392,3 +392,16 @@ h5 {
 .hidden {
     display: none;
 }
+
+.content .warn {
+    position: relative;
+    padding-left: calc(5em + .2rem);
+}
+
+.content .warn::before {
+    content: "温馨提示：";
+    position: absolute;
+    left: .2rem;
+    display: inline-block;
+    color: rgb(121, 121, 7);
+}
