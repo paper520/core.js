@@ -21,9 +21,6 @@ import get from './Object/get';
 // 值判断
 import eq from './Lang/eq';
 
-// 日期
-import valueOfDate from './Date/valueOfDate';
-
 let __ = {
 
     isSymbol, isObject, isBoolean, isElement, isFunction,
@@ -34,9 +31,7 @@ let __ = {
 
     set, get,
 
-    eq,
-
-    valueOfDate
+    eq
 
 };
 
