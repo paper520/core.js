@@ -29,40 +29,410 @@
             <input type="text" placeholder="Type to filter" oninput='doSearch(this.value)'>
         </div>
         <div name='menu-frame'>
-            <h4 onclick='togger(this)'>Object</h4>
+            <h4 onclick='togger(this)'>Date</h4>
             <ul>
-                <li onclick='toItem("get")'>__.get</li>
-                <li onclick='toItem("set")'>__.set</li>
+                <li onclick='toItem("isLeapYear")'>__.isLeapYear</li>
             </ul>
         </div>
         <div name='menu-frame'>
             <h4 onclick='togger(this)'>Lang</h4>
             <ul>
                 <li onclick='toItem("eq")'>__.eq</li>
-                <li onclick='toItem("isObject")'>__.isObject</li>
-                <li onclick='toItem("isSymbol")'>__.isSymbol</li>
                 <li onclick='toItem("isBoolean")'>__.isBoolean</li>
+                <li onclick='toItem("isDate")'>__.isDate</li>
                 <li onclick='toItem("isElement")'>__.isElement</li>
-                <li onclick='toItem("isText")'>__.isText</li>
                 <li onclick='toItem("isFunction")'>__.isFunction</li>
+                <li onclick='toItem("isNaN")'>__.isNaN</li>
                 <li onclick='toItem("isNull")'>__.isNull</li>
                 <li onclick='toItem("isNumber")'>__.isNumber</li>
+                <li onclick='toItem("isObject")'>__.isObject</li>
                 <li onclick='toItem("isString")'>__.isString</li>
+                <li onclick='toItem("isSymbol")'>__.isSymbol</li>
+                <li onclick='toItem("isText")'>__.isText</li>
                 <li onclick='toItem("isUndefined")'>__.isUndefined</li>
-                <li onclick='toItem("isDate")'>__.isDate</li>
-                <li onclick='toItem("isNaN")'>__.isNaN</li>
                 <li onclick='toItem("toString")'>__.toString</li>
             </ul>
         </div>
         <div name='menu-frame'>
-            <h4 onclick='togger(this)'>Date</h4>
+            <h4 onclick='togger(this)'>Object</h4>
             <ul>
-                <li onclick='toItem("isLeapYear")'>__.isLeapYear</li>
+                <li onclick='toItem("get")'>__.get</li>
+                <li onclick='toItem("set")'>__.set</li>
             </ul>
         </div>
+
     </div>
 
     <div class='content' id='content'>
+        <h4>”Date“ 方法</h4>
+        <pre class='prettyprint lang-js' id='isLeapYear'>__.isLeapYear(value);</pre>
+        <p>
+            判断是不是闰年。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Mon Aug 26 2019 GMT+0800</li>
+        </ul>
+        <h5>参数</h5>
+        <ul>
+            <li>
+                <em>value (number)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>返回</h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为闰年，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+
+        <h4>”Lang“ 方法</h4>
+        <pre class='prettyprint lang-js' id='eq'>__.eq(value, other);</pre>
+        <p>
+            比较两者的值，来确定它们是否相等(这里遵循
+            <a href='http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero' target="_blank">SameValueZero</a>规则)。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Fri Aug 23 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要比较的值。
+            </li>
+            <li>
+                <em>other (*)</em>: 另一个要比较的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果两个值相等返回 true ，否则返回 false 。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isBoolean'>__.isBoolean(value);</pre>
+        <p>
+            检查 value 是否是原始 boolean 类型或者对象。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个boolean，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class="prettyprint lang-js" id="isDate">__.isDate(value);</pre>
+        <p>
+            判断一个值是不是Date对象。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sun Aug 25 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个日期对象，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isElement'>__.isElement(value);</pre>
+        <p>
+            检查 value 是否是DOM 元素。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个DOM元素，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isFunction'>__.isFunction(value);</pre>
+        <p>
+            检查 value 是否是 Function 对象。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个Function，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class="prettyprint lang-js" id="isNaN">__.isNaN(value);</pre>
+        <p>
+            判断一个值是不是NaN。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Mon Aug 26 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为NaN，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isNull'>__.isNull(value);</pre>
+        <p>
+            检查 value 是否是 Null。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个Null，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isNumber'>__.isNumber(value);</pre>
+        <p>
+            检查 value 是否是原始Number数值型 或者 对象。
+        </p>
+        <p class="warn">
+            Infinity, -Infinity, 以及 NaN 也是数字。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个Number，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isObject'>__.isObject(value);</pre>
+        <p>
+            检查 value 是否为一个对象。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Fri Aug 23 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个对象，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isString'>__.isString(value);</pre>
+        <p>
+            检查 value 是否是原始字符串String或者对象。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个字符串，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isSymbol'>__.isSymbol(value);</pre>
+        <p>
+            检查 value 是否是原始 Symbol 或者对象。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Fri Aug 23 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个symbol，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isText'>__.isText(value);</pre>
+        <p>
+            检查 value 是否是文本结点。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sun Aug 25 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个文本结点，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isUndefined'>__.isUndefined(value);</pre>
+        <p>
+            检查 value 是否是 undefined。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sat Aug 24 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个undefined，那么返回 true，否则返回 false。
+            </li>
+        </ul>
+        <pre class="prettyprint lang-js" id="toString">__.toString(value);</pre>
+        <p>
+            把一个值转成字符串输出。
+        </p>
+        <p class="warn">
+            针对JSON类型，转义返回的是"[object object]"，而数组返回是友好的，针对JSON后期是否需要调整，目前还在讨论中。
+        </p>
+        <h5>添加时间</h5>
+        <ul>
+            <li>Sun Aug 25 2019 GMT+0800</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要转换的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(string)</em>:返回转换后的字符串。
+            </li>
+        </ul>
         <h4>”Object“ 方法</h4>
         <pre class='prettyprint lang-js' id='get'>__.get(object, path, [defaultValue]);</pre>
         <p>
@@ -126,374 +496,6 @@
         <ul>
             <li>
                 <em>(Object)</em>: 返回 object。
-            </li>
-        </ul>
-        <h4>”Lang“ 方法</h4>
-        <pre class='prettyprint lang-js' id='eq'>__.eq(value, other);</pre>
-        <p>
-            比较两者的值，来确定它们是否相等(这里遵循
-            <a href='http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero' target="_blank">SameValueZero</a>规则)。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Fri Aug 23 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要比较的值。
-            </li>
-            <li>
-                <em>other (*)</em>: 另一个要比较的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果两个值相等返回 true ，否则返回 false 。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isObject'>__.isObject(value);</pre>
-        <p>
-            检查 value 是否为一个对象。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Fri Aug 23 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个对象，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isSymbol'>__.isSymbol(value);</pre>
-        <p>
-            检查 value 是否是原始 Symbol 或者对象。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Fri Aug 23 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个symbol，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isBoolean'>__.isBoolean(value);</pre>
-        <p>
-            检查 value 是否是原始 boolean 类型或者对象。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sat Aug 24 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个boolean，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isElement'>__.isElement(value);</pre>
-        <p>
-            检查 value 是否是DOM 元素。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sat Aug 24 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个DOM元素，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isText'>__.isText(value);</pre>
-        <p>
-            检查 value 是否是文本结点。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sun Aug 25 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个文本结点，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isFunction'>__.isFunction(value);</pre>
-        <p>
-            检查 value 是否是 Function 对象。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sat Aug 24 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个Function，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isNull'>__.isNull(value);</pre>
-        <p>
-            检查 value 是否是 Null。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sat Aug 24 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个Null，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isNumber'>__.isNumber(value);</pre>
-        <p>
-            检查 value 是否是原始Number数值型 或者 对象。
-        </p>
-        <p class="warn">
-            Infinity, -Infinity, 以及 NaN 也是数字。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sat Aug 24 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个Number，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isString'>__.isString(value);</pre>
-        <p>
-            检查 value 是否是原始字符串String或者对象。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sat Aug 24 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个字符串，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class='prettyprint lang-js' id='isUndefined'>__.isUndefined(value);</pre>
-        <p>
-            检查 value 是否是 undefined。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sat Aug 24 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个undefined，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class="prettyprint lang-js" id="isDate">__.isDate(value);</pre>
-        <p>
-            判断一个值是不是Date对象。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sun Aug 25 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为一个日期对象，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class="prettyprint lang-js" id="isNaN">__.isNaN(value);</pre>
-        <p>
-            判断一个值是不是NaN。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Mon Aug 26 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为NaN，那么返回 true，否则返回 false。
-            </li>
-        </ul>
-        <pre class="prettyprint lang-js" id="toString">__.toString(value);</pre>
-        <p>
-            把一个值转成字符串输出。
-        </p>
-        <p class="warn">
-            针对JSON类型，转义返回的是"[object object]"，而数组返回是友好的，针对JSON后期是否需要调整，目前还在讨论中。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Sun Aug 25 2019 GMT+0800</li>
-        </ul>
-        <h5>
-            参数
-        </h5>
-        <ul>
-            <li>
-                <em>value (*)</em>: 要转换的值。
-            </li>
-        </ul>
-        <h5>
-            返回
-        </h5>
-        <ul>
-            <li>
-                <em>(string)</em>:返回转换后的字符串。
-            </li>
-        </ul>
-        <h4>”Date“ 方法</h4>
-        <pre class='prettyprint lang-js' id='isLeapYear'>__.isLeapYear(value);</pre>
-        <p>
-            判断是不是闰年。
-        </p>
-        <h5>添加时间</h5>
-        <ul>
-            <li>Mon Aug 26 2019 GMT+0800</li>
-        </ul>
-        <h5>参数</h5>
-        <ul>
-            <li>
-                <em>value (number)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>返回</h5>
-        <ul>
-            <li>
-                <em>(boolean)</em>: 如果 value 为闰年，那么返回 true，否则返回 false。
             </li>
         </ul>
     </div>
