@@ -12,7 +12,7 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Sun Aug 25 2019 17:47:56 GMT+0800 (GMT+08:00)
+* Date:Mon Aug 26 2019 14:45:15 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
@@ -220,6 +220,19 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   function isDate(value) {
     return value !== null && _typeof(value) === 'object' && getType(value) === '[object Date]';
+  }
+  /**
+   * 判断是不是NaN。
+   *
+   * @since Mon Aug 26 2019 GMT+0800
+   * @public
+   * @param {number} value 需要判断的值
+   * @returns {boolean} 如果是NaN返回true，否则返回false
+   */
+
+
+  function isNaN(value) {
+    return value !== value;
   }
 
   var symbolToString = Symbol.prototype.toString;
@@ -519,6 +532,24 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   function get(object, path, defaultValue) {
     var result = object === null ? undefined : baseGet(object, path);
     return result === undefined ? defaultValue : result;
+  }
+  /**
+   * 判断是不是闰年。
+   *
+   * @since Mon Aug 26 2019 GMT+0800
+   * @public
+   * @param {number} value 需要判断的年份
+   * @returns {boolean} 如果是闰年返回true，否则返回false
+   */
+
+
+  function isLeapYear(value) {
+    // 是数字，且不是NaN
+    if (isNumber(value) && !isNaN(value)) {
+      return value % 4 === 0 && (value % 100 !== 0 || value % 400 === 0);
+    } else {
+      throw new Error('Invalid value!');
+    }
   } // 类型判断
 
 
@@ -534,10 +565,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     isUndefined: isUndefined,
     isText: isText,
     isDate: isDate,
+    isNaN: isNaN,
     toString: toString$1,
     set: set,
     get: get,
-    eq: eq
+    eq: eq,
+    isLeapYear: isLeapYear
   }; // 判断当前环境，如果不是浏览器环境
 
   if ((typeof module === "undefined" ? "undefined" : _typeof(module)) === "object" && _typeof(module.exports) === "object") {

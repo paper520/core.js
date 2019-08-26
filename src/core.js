@@ -10,6 +10,7 @@ import isString from './Lang/isString';
 import isUndefined from './Lang/isUndefined';
 import isText from './Lang/isText';
 import isDate from './Lang/isDate';
+import isNaN from './Lang/isNaN';
 
 // 类型转换
 import toString from './Lang/toString';
@@ -21,17 +22,22 @@ import get from './Object/get';
 // 值判断
 import eq from './Lang/eq';
 
+// 日期
+import isLeapYear from './Date/isLeapYear';
+
 let __ = {
 
     isSymbol, isObject, isBoolean, isElement, isFunction,
     isNull, isNumber, isString, isUndefined, isText,
-    isDate,
+    isDate, isNaN,
 
     toString,
 
     set, get,
 
-    eq
+    eq,
+
+    isLeapYear
 
 };
 
