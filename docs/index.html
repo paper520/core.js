@@ -29,36 +29,26 @@
             <input type="text" placeholder="Type to filter" oninput='doSearch(this.value)'>
         </div>
         <div name='menu-frame'>
-            <h4 onclick='togger(this)'>XXX</h4>
+            <h4 onclick='togger(this)'>Lang</h4>
             <ul>
-                <li onclick='toItem("XXX")'>__.XXX</li>
+                <li onclick='toItem("clone")'>__.clone</li>
+                <li onclick='toItem("eq")'>__.eq</li>
+                <li onclick='toItem("type")'>__.type</li>
+                <li onclick='toItem("toString")'>__.toString</li>
+                <li onclick='toItem("toDate")'>__.toDate<li>
             </ul>
         </div>
-
+        <div name='menu-frame'>
+            <h4 onclick='togger(this)'>Object</h4>
+            <ul>
+                <li onclick='toItem("get")'>__.get</li>
+                <li onclick='toItem("set")'>__.set</li>
+            </ul>
+        </div>
     </div>
 
     <div class='content' id='content'>
-        <h4>”XXX“ 方法</h4>
-        <pre class='prettyprint lang-js' id='XXX'>__.XXX(value);</pre>
-        <p>
-            ??????
-        </p>
-        <h5>开始版本</h5>
-        <ul>
-            <li>?????</li>
-        </ul>
-        <h5>参数</h5>
-        <ul>
-            <li>
-                <em>XXX (type)</em>: 要检查的值。
-            </li>
-        </ul>
-        <h5>返回</h5>
-        <ul>
-            <li>
-                <em>(type)</em>: ？？？。
-            </li>
-        </ul>
+        
     </div>
 
 </body>
