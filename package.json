@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npm install && npm run build",
     "build": "npm run build:bundle && npm run build:babel && npm run build:uglify && node ./scripts/prependBanner.js",
-    "build:bundle": "rollup src/core.js --file dist/core.es5+.js --format iife --name 'bundle'",
+    "build:bundle": "rollup core.js --file dist/core.es5+.js --format iife --name 'bundle'",
     "build:babel": "npx babel dist/core.es5+.js --out-file dist/core.js",
     "build:uglify": "uglifyjs dist/core.js -o dist/core.min.js",
     "postinstall": "node ./scripts/postinstall.js || echo \"ignore\""
