@@ -1,6 +1,9 @@
+import get from './get';
+import set from './set';
+
 let __ = {
 
-
+    get, set
 
 };
 

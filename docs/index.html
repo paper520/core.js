@@ -23,23 +23,12 @@
     </a>
     <div class="header">
         <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>@yelloxing/core.js</h2>
-        JavaScript核心接口 | 开发阶段
+        JavaScript核心接口 | V0.1.0
     </div>
     <div class='menu' id='menu'>
         <div class="search">
             <i></i>
             <input type="text" placeholder="Type to filter" oninput='doSearch(this.value)'>
-        </div>
-        <div name='menu-frame'>
-            <h4 onclick='togger(this)'>Lang</h4>
-            <ul>
-                <li onclick='toItem("clone")'>__.clone</li>
-                <li onclick='toItem("eq")'>__.eq</li>
-                <li onclick='toItem("type")'>__.type</li>
-                <li onclick='toItem("toString")'>__.toString</li>
-                <li onclick='toItem("toDate")'>__.toDate
-                    <li>
-            </ul>
         </div>
         <div name='menu-frame'>
             <h4 onclick='togger(this)'>Object</h4>
@@ -51,7 +40,71 @@
     </div>
 
     <div class='content' id='content'>
-
+        <h4>”Object“ 方法</h4>
+        <pre class='prettyprint lang-js' id='get'>__.get(object, path, [defaultValue]);</pre>
+        <p>
+            根据 object对象的path路径获取值。 如果解析 value 是 undefined 会以 defaultValue 取代。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.1.0</li>
+        </ul>
+        <h5>参数</h5>
+        <ul>
+            <li>
+                <em>object (Object)</em>: 要检索的对象。
+            </li>
+            <li>
+                <em>path (Array|string)</em>: 要获取属性的路径。
+            </li>
+            <li>
+                <em>[defaultValue] (*)</em>: 如果解析值是
+                <em>undefined</em>，这值会被返回。
+            </li>
+        </ul>
+        <h5>返回</h5>
+        <ul>
+            <li>
+                <em>(*)</em>: 返回解析的值。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='set'>__.set(object, path, value, [customizer]);</pre>
+        <p>
+            设置 object对象中对应 path 属性路径上的值，如果path不存在，则创建。它接受一个 customizer，调用生成对象的 path。 如果 customizer 返回 undefined 将会使用{}代替。customizer 调用3个参数：
+            (nsValue, key, nsObject)。
+        </p>
+        <p class='warn'>
+            这个方法会改变 object.
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.1.0</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>object (Object)</em>: 要修改的对象。
+            </li>
+            <li>
+                <em>path (Array|string)</em>: 要设置的对象路径。
+            </li>
+            <li>
+                <em>value (*)</em>: 要设置的值。
+            </li>
+            <li>
+                <em>[customizer] (Function)</em>: 这个函数用来定制分配的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(Object)</em>: 返回 object。
+            </li>
+        </ul>
     </div>
 
 </body>

@@ -1,0 +1,66 @@
+content .warn {
+    position: relative;
+    padding-left: calc(5em + .2rem);
+}
+
+.content .warn::before {
+    content: "温馨提示：";
+    position: absolute;
+    left: .2rem;
+    display: inline-block;
+    color: rgb(121, 121, 7);
+}
+
+.content p a {
+    color: blue;
+    text-decoration: underline;
+    margin: 0 .05rem;
+}
+.content h4,
+.content p,
+.content ul,
+.content h5 {
+    padding: 0 .2rem;
+}
+
+.content p {
+    color: #5f5f5f;
+    font-size: .16rem;
+    line-height: 1.5;
+}
+
+.content p~p {
+    margin-top: .1rem;
+}
+
+.content p.warn {
+    font-weight: 800;
+    font-size: .13rem;
+    color: #000;
+}
+
+.content h5 {
+    letter-spacing: 0.5px;
+    margin-bottom: .16rem;
+    margin-top: .32rem;
+}
+
+.content ul li {
+    color: #5f5f5f;
+    line-height: 1.5em;
+}
+
+.content ul em {
+    font-style: normal;
+    color: #3492ff;
+    font-weight: 700;
+}
+
+
+.content h4 {
+    color: #5f5f5f;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-bottom: .2rem;
+    margin-top: .3rem;
+}
