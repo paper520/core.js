@@ -1,0 +1,143 @@
+@font-face {
+    font-family: 'iconFont';
+    src: url('icon.woff');
+    font-weight: normal;
+    font-style: normal
+}
+
+.header {
+    height: .7rem;
+    line-height: .7rem;
+    font-size: .2rem;
+    vertical-align: top;
+    background-color: #fff;
+    box-shadow: 0 0 .25rem #9da5ab;
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
+    font-family: cursive;
+}
+
+.header h2 {
+    vertical-align: top;
+    display: inline-block;
+    background-image: url('../logo.png');
+    font-size: 0;
+    width: .6rem;
+    margin: .1rem;
+    height: .5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90% auto;
+    border-right: 2px solid #c5c5c5;
+}
+
+.menu {
+    user-select: none;
+    position: fixed;
+    left: 0;
+    top: .7rem;
+    width: 3.1rem;
+    box-shadow: 0 0 0.3rem #9da5ab;
+    height: calc(100vh - .7rem);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: .2rem;
+}
+
+.content {
+    padding: .8rem 0 .1rem 3.1rem;
+    overflow: auto;
+    height: 100vh;
+}
+
+.menu h4 {
+    font-size: .2rem;
+    font-weight: 800;
+    line-height: 3em;
+    padding-left: .1rem;
+    cursor: pointer;
+}
+
+.menu h4::before {
+    font-family: iconFont;
+    padding-right: .05rem;
+    content: "\f147";
+    color: #5f5f5f;
+    font-size: .14rem;
+}
+
+.menu h4.close::before {
+    content: "\f196";
+}
+
+.menu h4.close~ul {
+    display: none;
+}
+
+.menu ul {
+    margin-left: .1rem;
+    border-left: 1px dashed #dcdcdc;
+    margin-top: 0.05rem;
+}
+
+.menu li {
+    margin-left: .1rem;
+    line-height: 2em;
+    cursor: pointer;
+}
+
+.github {
+    position: fixed;
+    transform: rotate(45deg);
+    top: .6rem;
+    line-height: 1.6em;
+    right: -.6rem;
+    background-color: #9e9695;
+    outline: .04rem solid #9e9695;
+    transform-origin: 1.5rem .23rem;
+    border: .02rem dashed #faf6f5;
+    width: 3rem;
+    text-align: center;
+    color: #f7f3f2;
+    z-index: 2;
+    font-family: sans-serif;
+}
+
+.menu .search {
+    position: relative;
+    padding: .2rem 0;
+}
+
+.menu .search i {
+    position: absolute;
+    color: #979797;
+    font-size: .15rem;
+    left: 7px;
+    font-family: iconFont;
+    top: 25px;
+    font-style: normal;
+}
+
+.menu .search i::before {
+    content: "\f002";
+}
+
+.menu .search input {
+    outline: none;
+    border: none;
+    width: 100%;
+    line-height: 2em;
+    height: 2em;
+    font-size: .16rem;
+    padding-left: .3rem;
+    border-bottom: 2px solid #c5c5c5;
+}
+
+.menu .search input:focus {
+    border-bottom-color: #5f5f5f;
+}
+
+.hidden {
+    display: none;
+}

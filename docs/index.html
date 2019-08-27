@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="core.js.png">
+    <link rel="shortcut icon" href="logo.png">
     <title>文档 | core.js</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="./core.current.js"></script>
+    <link rel="stylesheet" href="./styles/basic.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/content.css">
+    <script src="./libs/core.js"></script>
     <!-- 代码格式化 -->
-    <link rel="stylesheet" href="prettify.css">
-    <script src="prettify.js"></script>
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="./plugins/prettify.css">
+    <script src="./plugins/prettify.js"></script>
+    <script src="./libs/script.js"></script>
 </head>
 
 <body onload="prettyPrint();adjustScroll();initMenus();">
@@ -35,7 +37,8 @@
                 <li onclick='toItem("eq")'>__.eq</li>
                 <li onclick='toItem("type")'>__.type</li>
                 <li onclick='toItem("toString")'>__.toString</li>
-                <li onclick='toItem("toDate")'>__.toDate<li>
+                <li onclick='toItem("toDate")'>__.toDate
+                    <li>
             </ul>
         </div>
         <div name='menu-frame'>
@@ -48,7 +51,7 @@
     </div>
 
     <div class='content' id='content'>
-        
+
     </div>
 
 </body>
