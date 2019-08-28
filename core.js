@@ -1,8 +1,18 @@
+// Lang
+import eq from './eq';
+import toString from './toString';
+
+// Object
 import get from './get';
 import set from './set';
 
 let __ = {
 
+    // Lang
+    eq,
+    toString,
+
+    // Object
     get, set
 
 };

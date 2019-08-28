@@ -5,8 +5,8 @@ content .warn {
 
 .content .warn::before {
     content: "温馨提示：";
-    position: absolute;
-    left: .2rem;
+    position: releative;
+    left: 0;
     display: inline-block;
     color: rgb(121, 121, 7);
 }
@@ -37,6 +37,7 @@ content .warn {
     font-weight: 800;
     font-size: .13rem;
     color: #000;
+    position: relative;
 }
 
 .content h5 {

@@ -1,7 +1,7 @@
 const toString = Object.prototype.toString;
 
 /**
- * 或者一个值的类型字符串[object type]
+ * 获取一个值的类型字符串[object type]
  *
  * @private
  * @param {*} value 需要返回类型的值

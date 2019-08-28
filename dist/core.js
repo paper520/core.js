@@ -5,14 +5,14 @@
 *
 * author 心叶
 *
-* version 0.1.0
+* version 0.1.1
 *
 * build Wed Aug 21 2019
 *
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Tue Aug 27 2019 13:15:18 GMT+0800 (GMT+08:00)
+* Date:Wed Aug 28 2019 15:40:34 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
@@ -21,10 +21,42 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 (function () {
   'use strict';
+  /**
+   * 比较二个值是否相等
+   *
+   * @since V0.1.1
+   * @public
+   * @param {*} value 需要比较的值1
+   * @param {*} other 需要比较的值2
+   * @returns {boolean} 如果相等返回true，否则返回false
+   * @example
+   *
+   * const object = { 'a': 1 }
+   * const other = { 'a': 1 }
+   *
+   * eq(object, object)
+   * // => true
+   *
+   * eq(object, other)
+   * // => false
+   *
+   * eq('a', 'a')
+   * // => true
+   *
+   * eq('a', Object('a'))
+   * // => false
+   *
+   * eq(NaN, NaN)
+   * // => true
+   */
+
+  function eq(value, other) {
+    return value === other || value !== value && other !== other;
+  }
 
   var toString = Object.prototype.toString;
   /**
-   * 或者一个值的类型字符串[object type]
+   * 获取一个值的类型字符串[object type]
    *
    * @private
    * @param {*} value 需要返回类型的值
@@ -51,6 +83,92 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     var type = _typeof(value);
 
     return type == 'symbol' || type == 'object' && value != null && getType(value) == '[object Symbol]';
+  }
+  /**
+   * 判断一个值是不是String。
+   *
+   * @private
+   * @param {*} value 需要判断类型的值
+   * @returns {boolean} 如果是String返回true，否则返回false
+   */
+
+
+  function isString(value) {
+    var type = _typeof(value);
+
+    return type == 'string' || type == 'object' && value != null && !Array.isArray(value) && getType(value) == '[object String]';
+  }
+
+  var symbolToString = Symbol.prototype.toString;
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  var INFINITY = 1 / 0;
+  /**
+   * 把一个值变成字符串。
+   *
+   * @since V0.1.1
+   * @public
+   * @param {*} value 需要判断类型的值
+   * @returns {string} 返回转换后的字符串
+   * @example
+   *
+   * toString(null)
+   * // => ''
+   *
+   * toString(-0)
+   * // => '-0'
+   *
+   * toString([1, 2, 3])
+   * // => '[1,2,3]'
+   */
+
+  function toString$1(value) {
+    // 如果value是null或者undefined，都返回""
+    if (value == null) {
+      return '';
+    } // 如果是普通的字符串
+
+
+    if (typeof value === 'string') {
+      return value;
+    } // 如果字符串对象
+
+
+    if (isString(value)) {
+      return value + "";
+    } // 如果是数组，就展开(多层)
+
+
+    if (Array.isArray(value)) {
+      var _temp = [];
+
+      for (var i = 0; i < value.length; i++) {
+        // 因为元素也可能是各种类型，递归转换
+        _temp[i] = toString$1(value[i]);
+      }
+
+      return "[".concat(_temp, "]");
+    }
+
+    if (isSymbol(value)) {
+      return symbolToString ? symbolToString.call(value) : "";
+    } // 特殊类型外的，可迭代数据
+
+
+    var temp = "";
+
+    for (var key in value) {
+      // ES并没有保护 hasOwnProperty 属性名，因此使用 Object 原型上的 hasOwnProperty 属性
+      if (hasOwnProperty.call(value, key)) temp += ",\"" + toString$1(key) + "\":" + toString$1(value[key]);
+    }
+
+    if (temp !== "") {
+      temp = temp.replace(/^,/, "");
+      return "{" + temp + "}";
+    }
+
+    var result = "".concat(value); // 针对数字-0特殊除了，防止变成字符串"0"
+
+    return result === '0' && 1 / value === -INFINITY ? "-0" : result;
   }
   /**
    * 判断是不是一个对象上的属性
@@ -105,7 +223,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return isKey(value, object) ? [value] : stringToPath(value);
   }
 
-  var INFINITY = 1 / 0;
+  var INFINITY$1 = 1 / 0;
   /**
    * 如果value不是字符串或者symbol，就变成字符串
    *
@@ -120,7 +238,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
 
     var result = "".concat(value);
-    return result === '0' && 1 / value === -INFINITY ? "-0" : result;
+    return result === '0' && 1 / value === -INFINITY$1 ? "-0" : result;
   }
   /**
    * 获取一个对象属性值的基础方法，没有默认值。
@@ -288,9 +406,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   function set(object, path, value, customizer) {
     customizer = typeof customizer == 'function' ? customizer : undefined;
     return object == null ? object : baseSet(object, path, value, customizer);
-  }
+  } // Lang
+
 
   var __ = {
+    // Lang
+    eq: eq,
+    toString: toString$1,
+    // Object
     get: get,
     set: set
   }; // 判断当前环境，如果不是浏览器环境

@@ -31,6 +31,13 @@
             <input type="text" placeholder="Type to filter" oninput='doSearch(this.value)'>
         </div>
         <div name='menu-frame'>
+            <h4 onclick='togger(this)'>Lang</h4>
+            <ul>
+                <li onclick='toItem("eq")'>__.eq</li>
+                <li onclick='toItem("toString")'>__.toString</li>
+            </ul>
+        </div>
+        <div name='menu-frame'>
             <h4 onclick='togger(this)'>Object</h4>
             <ul>
                 <li onclick='toItem("get")'>__.get</li>
@@ -40,6 +47,59 @@
     </div>
 
     <div class='content' id='content'>
+        <h4>”Lang“ 方法</h4>
+        <pre class='prettyprint lang-js' id='eq'>__.eq(value, other);</pre>
+        <p>
+            比较两者的值，来确定它们是否相等(这里遵循
+            <a href='http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero' target="_blank">SameValueZero</a>规则)。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.1.1</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要比较的值。
+            </li>
+            <li>
+                <em>other (*)</em>: 另一个要比较的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果两个值相等返回 true ，否则返回 false 。
+            </li>
+        </ul>
+        <pre class="prettyprint lang-js" id="toString">__.toString(value);</pre>
+        <p>
+            把一个值转成字符串输出。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.1.1</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要转换的值。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(string)</em>:返回转换后的字符串。
+            </li>
+        </ul>
         <h4>”Object“ 方法</h4>
         <pre class='prettyprint lang-js' id='get'>__.get(object, path, [defaultValue]);</pre>
         <p>
