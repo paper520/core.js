@@ -5,14 +5,14 @@
 *
 * author 心叶
 *
-* version 0.1.1
+* version 0.1.2
 *
 * build Wed Aug 21 2019
 *
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Wed Aug 28 2019 15:40:34 GMT+0800 (GMT+08:00)
+* Date:Thu Aug 29 2019 11:36:04 GMT+0800 (GMT+08:00)
 */
 
 (function () {
@@ -69,7 +69,8 @@
     /**
      * 判断一个值是不是symbol。
      *
-     * @private
+     * @since V0.1.2
+     * @public
      * @param {*} value 需要判断类型的值
      * @returns {boolean} 如果是symbol返回true，否则返回false
      */
@@ -81,7 +82,8 @@
     /**
      * 判断一个值是不是String。
      *
-     * @private
+     * @since V0.1.2
+     * @public
      * @param {*} value 需要判断类型的值
      * @returns {boolean} 如果是String返回true，否则返回false
      */
@@ -158,6 +160,102 @@
         const result = `${value}`;
         // 针对数字-0特殊除了，防止变成字符串"0"
         return (result === '0' && 1 / value === -INFINITY) ? "-0" : result;
+    }
+
+    /**
+     * 判断一个值是不是Object。
+     *
+     * @since V0.1.2
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是Object返回true，否则返回false
+     */
+    function isObject (value) {
+        const type = typeof value;
+        return value != null && (type == 'object' || type == 'function');
+    }
+
+    /**
+     * 判断一个值是不是Boolean。
+     *
+     * @since V0.1.2
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是Boolean返回true，否则返回false
+     */
+    function isBoolean (value) {
+        return value === true || value === false ||
+            (value !== null && typeof value === 'object' && getType(value) == '[object Boolean]');
+    }
+
+    /**
+     * 判断一个值是不是一个朴素的'对象'
+     *
+     * @private
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是朴素的'对象'返回true，否则返回false
+     */
+
+    function isPlainObject (value) {
+        if (value === null || typeof value !== 'object' || getType(value) != '[object Object]') {
+            return false;
+        }
+
+        // 如果原型为null
+        if (Object.getPrototypeOf(value) === null) {
+            return true;
+        }
+
+        let proto = value;
+        while (Object.getPrototypeOf(proto) !== null) {
+            proto = Object.getPrototypeOf(proto);
+        }
+        return Object.getPrototypeOf(value) === proto;
+    }
+
+    /**
+     * 判断一个值是不是结点元素。
+     *
+     * @since V0.1.2
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是结点元素返回true，否则返回false
+     */
+    function isElement (value) {
+        return value !== null && typeof value === 'object' &&
+            (value.nodeType === 1 || value.nodeType === 9 || value.nodeType === 11) &&
+            !isPlainObject(value);
+    }
+
+    /**
+     * 判断一个值是不是文本结点。
+     *
+     * @since V0.1.2
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是结点元素返回true，否则返回false
+     */
+    function isText (value) {
+        return value !== null && typeof value === 'object' &&
+            value.nodeType === 3 && !isPlainObject(value);
+    }
+
+    /**
+     * 判断一个值是不是Function。
+     *
+     * @since V0.1.2
+     * @public
+     * @param {*} value 需要判断类型的值
+     * @returns {boolean} 如果是Function返回true，否则返回false
+     */
+    function isFunction (value) {
+        if (!isObject(value)) {
+            return false;
+        }
+
+        const type = getType(value);
+        return type == '[object Function]' || type == '[object AsyncFunction]' ||
+            type == '[object GeneratorFunction]' || type == '[object Proxy]';
     }
 
     /**
@@ -275,20 +373,8 @@
      */
 
     function get (object, path, defaultValue) {
-        let result = object === null ? undefined : baseGet(object, path);
+        let result = object == null ? undefined : baseGet(object, path);
         return result === undefined ? defaultValue : result;
-    }
-
-    /**
-     * 判断一个值是不是Object。
-     *
-     * @private
-     * @param {*} value 需要判断类型的值
-     * @returns {boolean} 如果是Object返回true，否则返回false
-     */
-    function isObject (value) {
-        const type = typeof value;
-        return value != null && (type == 'object' || type == 'function');
     }
 
     /**
@@ -399,6 +485,7 @@
         // Lang
         eq,
         toString: toString$1,
+        isObject, isSymbol, isString, isBoolean, isElement, isText, isFunction,
 
         // Object
         get, set

@@ -1,5 +1,5 @@
-import isSymbol from './.inside/isSymbol';
-import isString from './.inside/isString';
+import isSymbol from './isSymbol';
+import isString from './isString';
 
 const symbolToString = Symbol.prototype.toString;
 const hasOwnProperty = Object.prototype.hasOwnProperty;

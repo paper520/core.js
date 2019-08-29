@@ -1,6 +1,13 @@
 // Lang
 import eq from './eq';
 import toString from './toString';
+import isObject from './isObject';
+import isSymbol from './isSymbol';
+import isString from './isString';
+import isBoolean from './isBoolean';
+import isElement from './isElement';
+import isText from './isText';
+import isFunction from './isFunction';
 
 // Object
 import get from './get';
@@ -11,6 +18,7 @@ let __ = {
     // Lang
     eq,
     toString,
+    isObject, isSymbol, isString, isBoolean, isElement, isText, isFunction,
 
     // Object
     get, set
