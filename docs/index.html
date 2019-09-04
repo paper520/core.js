@@ -137,7 +137,7 @@
         </ul>
         <pre class='prettyprint lang-js' id='isError'>__.isError(value);</pre>
         <p>
-            检查 value 是否为一个错误对象。
+            检查 value 是否是 Error, EvalError, RangeError, ReferenceError, SyntaxError, TypeError, 或者 URIError对象。
         </p>
         <h5>开始版本</h5>
         <ul>
@@ -210,6 +210,9 @@
         <pre class='prettyprint lang-js' id='isNumber'>__.isNumber(value);</pre>
         <p>
             检查 value 是否为一个数字或数字对象。
+        </p>
+        <p class="warn">
+            Infinity, -Infinity,以及 NaN 也是数值类型。
         </p>
         <h5>开始版本</h5>
         <ul>

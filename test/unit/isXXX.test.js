@@ -41,10 +41,12 @@ QUnit.test('isNull', 3, function () {
 
 });
 
-QUnit.test('isNumber', 3, function () {
+QUnit.test('isNumber', 5, function () {
 
     equal(__.isNumber('123'), false);
-    equal(__.isNumber(123), true);
+    equal(__.isNumber(Infinity), true);
+    equal(__.isNumber(-Infinity), true);
+    equal(__.isNumber(NaN), true);
     equal(__.isNumber(new Number(123)), true);
 
 });
