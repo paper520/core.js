@@ -8,6 +8,10 @@ import isBoolean from './isBoolean';
 import isElement from './isElement';
 import isText from './isText';
 import isFunction from './isFunction';
+import isError from './isError';
+import isNull from './isNull';
+import isNumber from './isNumber';
+import isUndefined from './isUndefined';
 
 // Object
 import get from './get';
@@ -19,6 +23,7 @@ let __ = {
     eq,
     toString,
     isObject, isSymbol, isString, isBoolean, isElement, isText, isFunction,
+    isError, isNull, isNumber, isUndefined,
 
     // Object
     get, set

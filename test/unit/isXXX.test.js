@@ -19,6 +19,12 @@ QUnit.test('isElement', 4, function () {
 
 });
 
+QUnit.test('isError', 2, function () {
+
+    equal(__.isError(new Error('')), true);
+    equal(__.isError(Error), false);
+
+});
 
 QUnit.test('isFunction', 2, function () {
 
@@ -27,6 +33,21 @@ QUnit.test('isFunction', 2, function () {
 
 });
 
+QUnit.test('isNull', 3, function () {
+
+    equal(__.isNull(new Error('')), false);
+    equal(__.isNull(null), true);
+    equal(__.isNull(undefined), false);
+
+});
+
+QUnit.test('isNumber', 3, function () {
+
+    equal(__.isNumber('123'), false);
+    equal(__.isNumber(123), true);
+    equal(__.isNumber(new Number(123)), true);
+
+});
 
 QUnit.test('isObject', 4, function () {
 
@@ -54,5 +75,13 @@ QUnit.test('isText', 2, function () {
 
     equal(__.isText(document.createTextNode('文本结点')), true);
     equal(__.isText(document.createElement('div')), false);
+
+});
+QUnit.test('isUndefined', 4, function () {
+
+    equal(__.isUndefined(undefined), true);
+    equal(__.isUndefined(), true);
+    equal(__.isUndefined(null), false);
+    equal(__.isUndefined(""), false);
 
 });
