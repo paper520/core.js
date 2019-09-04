@@ -10,5 +10,5 @@ import getType from './.inside/getType';
  */
 export default function (value) {
     const type = typeof value;
-    return type == 'symbol' || (type == 'object' && value != null && getType(value) == '[object Symbol]');
+    return type === 'symbol' || (type === 'object' && value !== null && getType(value) === '[object Symbol]');
 };

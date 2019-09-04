@@ -16,6 +16,6 @@ export default function (value) {
     }
 
     const type = getType(value);
-    return type == '[object Error]' || type == '[object DOMException]' ||
-        (typeof value.message == 'string' && typeof value.name == 'string' && !isPlainObject(value));
+    return type === '[object Error]' || type === '[object DOMException]' ||
+        (typeof value.message === 'string' && typeof value.name === 'string' && !isPlainObject(value));
 };

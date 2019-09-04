@@ -10,5 +10,5 @@ import getType from './.inside/getType';
  */
 export default function (value) {
     return value === true || value === false ||
-        (value !== null && typeof value === 'object' && getType(value) == '[object Boolean]');
+        (value !== null && typeof value === 'object' && getType(value) === '[object Boolean]');
 };

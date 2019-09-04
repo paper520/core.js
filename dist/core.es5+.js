@@ -12,7 +12,7 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Wed Sep 04 2019 09:48:34 GMT+0800 (GMT+08:00)
+* Date:Wed Sep 04 2019 09:56:01 GMT+0800 (GMT+08:00)
 */
 
 (function () {
@@ -76,7 +76,7 @@
      */
     function isSymbol (value) {
         const type = typeof value;
-        return type == 'symbol' || (type == 'object' && value != null && getType(value) == '[object Symbol]');
+        return type === 'symbol' || (type === 'object' && value !== null && getType(value) === '[object Symbol]');
     }
 
     /**
@@ -89,7 +89,7 @@
      */
     function isString (value) {
         const type = typeof value;
-        return type == 'string' || (type == 'object' && value != null && !Array.isArray(value) && getType(value) == '[object String]');
+        return type === 'string' || (type === 'object' && value != null && !Array.isArray(value) && getType(value) === '[object String]');
     }
 
     const symbolToString = Symbol.prototype.toString;
@@ -172,7 +172,7 @@
      */
     function isObject (value) {
         const type = typeof value;
-        return value != null && (type == 'object' || type == 'function');
+        return value != null && (type === 'object' || type === 'function');
     }
 
     /**
@@ -185,7 +185,7 @@
      */
     function isBoolean (value) {
         return value === true || value === false ||
-            (value !== null && typeof value === 'object' && getType(value) == '[object Boolean]');
+            (value !== null && typeof value === 'object' && getType(value) === '[object Boolean]');
     }
 
     /**
@@ -254,8 +254,8 @@
         }
 
         const type = getType(value);
-        return type == '[object Function]' || type == '[object AsyncFunction]' ||
-            type == '[object GeneratorFunction]' || type == '[object Proxy]';
+        return type === '[object Function]' || type === '[object AsyncFunction]' ||
+            type === '[object GeneratorFunction]' || type === '[object Proxy]';
     }
 
     /**
@@ -273,8 +273,8 @@
         }
 
         const type = getType(value);
-        return type == '[object Error]' || type == '[object DOMException]' ||
-            (typeof value.message == 'string' && typeof value.name == 'string' && !isPlainObject(value));
+        return type === '[object Error]' || type === '[object DOMException]' ||
+            (typeof value.message === 'string' && typeof value.name === 'string' && !isPlainObject(value));
     }
 
     /**
@@ -532,7 +532,7 @@
      * // {a:{b:[1,2,3]}}
      */
     function set (object, path, value, customizer) {
-        customizer = typeof customizer == 'function' ? customizer : undefined;
+        customizer = typeof customizer === 'function' ? customizer : undefined;
         return object == null ? object : baseSet(object, path, value, customizer);
     }
 

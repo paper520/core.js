@@ -15,6 +15,6 @@ export default function (value) {
     }
 
     const type = getType(value);
-    return type == '[object Function]' || type == '[object AsyncFunction]' ||
-        type == '[object GeneratorFunction]' || type == '[object Proxy]';
+    return type === '[object Function]' || type === '[object AsyncFunction]' ||
+        type === '[object GeneratorFunction]' || type === '[object Proxy]';
 };

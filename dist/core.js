@@ -12,7 +12,7 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Wed Sep 04 2019 09:48:34 GMT+0800 (GMT+08:00)
+* Date:Wed Sep 04 2019 09:56:01 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
@@ -83,7 +83,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   function isSymbol(value) {
     var type = _typeof(value);
 
-    return type == 'symbol' || type == 'object' && value != null && getType(value) == '[object Symbol]';
+    return type === 'symbol' || type === 'object' && value !== null && getType(value) === '[object Symbol]';
   }
   /**
    * 判断一个值是不是String。
@@ -98,7 +98,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   function isString(value) {
     var type = _typeof(value);
 
-    return type == 'string' || type == 'object' && value != null && !Array.isArray(value) && getType(value) == '[object String]';
+    return type === 'string' || type === 'object' && value != null && !Array.isArray(value) && getType(value) === '[object String]';
   }
 
   var symbolToString = Symbol.prototype.toString;
@@ -185,7 +185,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   function isObject(value) {
     var type = _typeof(value);
 
-    return value != null && (type == 'object' || type == 'function');
+    return value != null && (type === 'object' || type === 'function');
   }
   /**
    * 判断一个值是不是Boolean。
@@ -198,7 +198,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
   function isBoolean(value) {
-    return value === true || value === false || value !== null && _typeof(value) === 'object' && getType(value) == '[object Boolean]';
+    return value === true || value === false || value !== null && _typeof(value) === 'object' && getType(value) === '[object Boolean]';
   }
   /**
    * 判断一个值是不是一个朴素的'对象'
@@ -269,7 +269,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
 
     var type = getType(value);
-    return type == '[object Function]' || type == '[object AsyncFunction]' || type == '[object GeneratorFunction]' || type == '[object Proxy]';
+    return type === '[object Function]' || type === '[object AsyncFunction]' || type === '[object GeneratorFunction]' || type === '[object Proxy]';
   }
   /**
    * 判断一个值是不是错误对象。
@@ -288,7 +288,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
 
     var type = getType(value);
-    return type == '[object Error]' || type == '[object DOMException]' || typeof value.message == 'string' && typeof value.name == 'string' && !isPlainObject(value);
+    return type === '[object Error]' || type === '[object DOMException]' || typeof value.message === 'string' && typeof value.name === 'string' && !isPlainObject(value);
   }
   /**
    * 判断一个值是不是null。
@@ -549,7 +549,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
   function set(object, path, value, customizer) {
-    customizer = typeof customizer == 'function' ? customizer : undefined;
+    customizer = typeof customizer === 'function' ? customizer : undefined;
     return object == null ? object : baseSet(object, path, value, customizer);
   } // Lang
 

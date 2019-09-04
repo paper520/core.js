@@ -10,5 +10,5 @@ import getType from './.inside/getType';
  */
 export default function (value) {
     const type = typeof value;
-    return type == 'string' || (type == 'object' && value != null && !Array.isArray(value) && getType(value) == '[object String]');
+    return type === 'string' || (type === 'object' && value != null && !Array.isArray(value) && getType(value) === '[object String]');
 };
