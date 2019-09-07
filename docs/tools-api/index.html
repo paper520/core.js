@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="../logo.png">
+    <title>工具库 | core.js</title>
+    <link rel="stylesheet" href="../styles/basic.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="../libs/core.js"></script>
+    <!-- 代码格式化 -->
+    <link rel="stylesheet" href="../plugins/prettify.css">
+    <script src="../plugins/prettify.js"></script>
+</head>
+
+<body onload="prettyPrint();">
+    <a href="https://github.com/yelloxing/core.js" class="github" target="_blank">
+        Fork me on Github
+    </a>
+    <div class="header">
+        <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>
+            @yelloxing/core.js</h2>
+        JavaScript工具库
+        |
+        <a href="../index.html">查看核心</a>
+    </div>
+    <div class="tools-content">
+        <div class="banner">
+            本文档用于说明一些核心工具，这些工具和核心接口不一样，打包的时候没有包含进去，你可以在需要的使用引入对应的接口，这样可以大大减小文件大小。
+        </div>
+
+        <h2 class="title">Matrix4三维坐标变换</h2>
+        <pre class="npm-code prettyprint lang-js">import Matrix4 from '@yelloxing/core.js/tools/Matrix4';</pre>
+        <p>
+            Matrix4是一个列主序存储的4x4矩阵，使用该矩阵对象的第一步是像下面这样获取该对象，参数initMatrix4可选，你可以传递一个初始化矩阵或默认采用单位矩阵E初始化。
+        </p>
+        <pre class="code prettyprint lang-js">var matrix4=Matrix4(initMatrix4);</pre>
+        <p>
+            和前面的二维坐标变换不同的是，变换不是直接作用在具体的点上，而是先求解出一系列变换的变换矩阵，最后应用在具体点上。
+        </p>
+        <h4 class="little-title">基本运算</h4>
+        <p>
+            返回matrix4当前记录的内部矩阵：
+        </p>
+        <pre class="code prettyprint lang-js">var val=matrix4.value();</pre>
+        <p>
+            比如采用默认值初始化的矩阵对象，打印结果如下：
+        </p>
+        <pre class="code prettyprint lang-js">(16) [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]</pre>
+        <p>
+            二个矩阵相乘：
+        </p>
+        <pre class="code prettyprint lang-js">matrix4.multiply(newMatrix4[, flag]);</pre>
+        <p>
+            第一个参数应该是一个和value打印出来一样格式的一维数组，列主序存储。flag默认false，可不传，表示左乘，即newMatrix4 × matrix4，如果设置flag为true，表示右乘。
+        </p>
+        <p>
+            把变换矩阵作用在具体的点上：
+        </p>
+        <pre class="code prettyprint lang-js">var position=matrix4.use(x, y, z, w);</pre>
+        <p>
+            矩阵的目的是对坐标进行变换，use方法返回齐次坐标(x, y, z, w)经过matrix4矩阵变换后的坐标值。其中z和w可以不传递，默认0和1，返回的坐标值是一个齐次坐标。
+        </p>
+        <h4 class="little-title">坐标变换</h4>
+        <p>
+            沿着向量(a, b, c)方向移动距离dis（其中c可以不传，默认0）：
+        </p>
+        <pre class="code prettyprint lang-js">matrix4.move(dis, a, b, c);</pre>
+        <p>
+            以点(cx, cy, cz)为中心，分别在x、y和z方向上缩放xTimes、yTimes和zTimes倍（其中cx、cy和cz都可以不传递，默认0）：
+        </p>
+        <pre class="code prettyprint lang-js">matrix4.scale(xTimes, yTimes, zTimes, cx, cy, cz);</pre>
+        <p>
+            围绕射线(a1, b1, c1) -> (a2, b2, c2)旋转deg度（方向由右手法则确定）：
+        </p>
+        <pre class="code prettyprint lang-js">matrix4.rotate(deg, a1, b1, c1, a2, b2, c2);</pre>
+        <p>
+            a1、b1、c1、a2、b2和c2这6个值在设置的时候，不是一定需要全部设置，还有以下可选：
+        </p>
+        <ul>
+            <li>1.只设置了a1和b1，表示在xoy平面围绕（a1, b1）旋转。</li>
+            <li>2.设置三个点(设置不足六个点都认为只设置了三个点)，表示围绕从原点出发的射线旋转。</li>
+        </ul>
+
+        <h2 class="title">动画Animation</h2>
+        <pre class="npm-code prettyprint lang-js">import animation from '@yelloxing/core.js/tools/animation';</pre>
+        <p>
+            这里不是真正的动画，只是一个方便你实现动画效果的一个辅助方法：
+        </p>
+        <pre class="code prettyprint lang-js">var stop=animation(function(deep){
+    // deep取值0-1，表示动画进度
+}, speeds, function(deep){
+    // deep和上面一样，提供的原因是有时候结束回调是stop方法触发而不是动画结束了
+});</pre>
+        <p>
+            该方法有三个参数：分别表示画帧方法、动画时长和动画结束回调（动画时长单位毫秒，最后二个均可选）。
+        </p>
+        <p>
+            如果你希望动画立刻结束，可以调用下面的方法强行提前停止：
+        </p>
+        <pre class="code prettyprint lang-js">stop();</pre>
+
+        <h2 class="title">基本树布局</h2>
+        <pre class="npm-code prettyprint lang-js">import tree from '@yelloxing/core.js/tools/tree';</pre>
+        <p>
+            树布局是用于计算一个树结构的坐标的方法，传递配置config就可以获取树布局实例：
+        </p>
+        <pre class="code prettyprint lang-js">var treeObj=tree(config);</pre>
+        <p>
+            config是一个键值对格式的配置json，由于原始数据格式不一定，你需要传递数据格式的配置：
+        </p>
+        <ul>
+            <li>1."root":function(initTree){ /*返回根结点*/ }</li>
+            <li>2."id":function(treedata){ /*返回id*/ }</li>
+            <li>3."child":function(parentTree, initTree){ /*返回孩子结点*/ }</li>
+        </ul>
+        <p>
+            现在传递数据data进行计算即可：
+        </p>
+        <pre class="code prettyprint lang-js">var resultData=treeObj(data);</pre>
+        <p>
+        resultData是计算后带有结点坐标的数据，格式如下：
+        </p>
+        <pre class="code prettyprint lang-js">{node: {
+    "XXX":{
+        children: []
+        data: any
+        id: string||number
+        left: number
+        pid: any
+        top: number
+    },
+    ...
+}, root: string||number, size: number, deep: number}</pre>
+        <p>
+            node记录的是每个结点的信息，每个结点中的left和top就是该结点应该绘制的位置，data是结点的原始数据。
+        </p>
+        <p>
+            可能你已经发现了，树图分为很多种（圆形树，倒树等），上面并没有配置这些信息,是的，因为可能的树图无法预测，我们这里选择了一种最简单的模型，方便具体使用的可以在此基础上快速开发。
+        </p>
+        <p>
+            这是一棵从左到右，根节点位于左中心，每个节点位于一个1x1的正方形中心的单元树。
+        </p>
+
+        <h2 class="title">Hermite三次插值</h2>
+        <pre class="npm-code prettyprint lang-js">import Hermite from '@yelloxing/core.js/tools/Hermite';</pre>
+        <p>
+            三次插值法，调用该方法就会返回一个插值对象：
+        </p>
+        <pre class="code prettyprint lang-js">var hermite=Hermite(config);</pre>
+        <p>
+            config有一个配置项，config.u，设置张弛系数(应该在点的位置设置前设置)：
+        </p>
+        <p>
+            该参数用于调整曲线走势，默认数值u=0.5，分水岭u=1，|u-1|的值越大，曲线走势调整的越严重。
+        </p>
+        <p>
+            设置点的位置:
+        </p>
+        <pre class="code prettyprint lang-js">hermite.setP(x1, y1, x2, y2, s1, s2);</pre>
+        <p>
+            参数分别表示：左边点的位置(x1, y1)，右边点的位置(x2, y2)和二个点的斜率s1，s2。
+        </p>
+        <p>
+            经过上面的设置，插值对象就可以求值了。比如x=a，其中a在需要插值的点之间（边界也可以），你可以这样求解出y值：
+        </p>
+        <pre class="code prettyprint lang-js">var y=hermite(a);</pre>
+    </div>
+
+</body>
+
+</html>

@@ -34,3 +34,9 @@ or
 ```js
 import __ from '@yelloxing/core.js';
 ```
+
+## License
+
+[MIT](https://github.com/yelloxing/core.js/blob/master/LICENSE)
+
+Copyright (c) 2007夏-present 走一步 再走一步
