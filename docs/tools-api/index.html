@@ -14,9 +14,10 @@
     <!-- 代码格式化 -->
     <link rel="stylesheet" href="../plugins/prettify.css">
     <script src="../plugins/prettify.js"></script>
+    <script src="../libs/script.js"></script>
 </head>
 
-<body onload="prettyPrint();">
+<body onload="prettyPrint();adjustScroll();">
     <a href="https://github.com/yelloxing/core.js" class="github" target="_blank">
         Fork me on Github
     </a>
@@ -27,12 +28,18 @@
         |
         <a href="../index.html">查看核心</a>
     </div>
-    <div class="tools-content">
+    <div class="menu">
+        <h5 onclick='toItem("Matrix4")'>Matrix4三维坐标变换</h5>
+        <h5 onclick='toItem("animation")'>动画Animation</h5>
+        <h5 onclick='toItem("tree")'>基本树布局</h5>
+        <h5 onclick='toItem("hermite")'>Hermite三次插值</h5>
+    </div>
+    <div class="tools-content" id='content'>
         <div class="banner">
             本文档用于说明一些核心工具，这些工具和核心接口不一样，打包的时候没有包含进去，你可以只引入对应的接口，这样可以大大减小文件大小。
         </div>
 
-        <h2 class="title">Matrix4三维坐标变换</h2>
+        <h2 class="title" id='Matrix4'>Matrix4三维坐标变换</h2>
         <pre class="npm-code prettyprint lang-js">import Matrix4 from '@yelloxing/core.js/tools/Matrix4';</pre>
         <p>
             Matrix4是一个列主序存储的4x4矩阵，使用该矩阵对象的第一步是像下面这样获取该对象，参数initMatrix4可选，你可以传递一个初始化矩阵或默认采用单位矩阵E初始化。
@@ -85,7 +92,7 @@
             <li>2.设置三个点(设置不足六个点都认为只设置了三个点)，表示围绕从原点出发的射线旋转。</li>
         </ul>
 
-        <h2 class="title">动画Animation</h2>
+        <h2 class="title" id='animation'>动画Animation</h2>
         <pre class="npm-code prettyprint lang-js">import animation from '@yelloxing/core.js/tools/animation';</pre>
         <p>
             这里不是真正的动画，只是一个方便你实现动画效果的一个辅助方法：
@@ -103,7 +110,7 @@
         </p>
         <pre class="code prettyprint lang-js">stop();</pre>
 
-        <h2 class="title">基本树布局</h2>
+        <h2 class="title" id='tree'>基本树布局</h2>
         <pre class="npm-code prettyprint lang-js">import tree from '@yelloxing/core.js/tools/tree';</pre>
         <p>
             树布局是用于计算一个树结构的坐标的方法，传递配置config就可以获取树布局实例：
@@ -145,7 +152,7 @@
             这是一棵从左到右，根节点位于左中心，每个节点位于一个1x1的正方形中心的单元树。
         </p>
 
-        <h2 class="title">Hermite三次插值</h2>
+        <h2 class="title" id='hermite'>Hermite三次插值</h2>
         <pre class="npm-code prettyprint lang-js">import Hermite from '@yelloxing/core.js/tools/Hermite';</pre>
         <p>
             三次插值法，调用该方法就会返回一个插值对象：
