@@ -7,9 +7,9 @@
  * @since V0.2.0
  * @public
  */
-export default function () {
+export default function (_config) {
 
-    let config = {},
+    let config = _config || {},
         // 维护的树
         alltreedata,
         // 根结点ID

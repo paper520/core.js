@@ -18,6 +18,12 @@
     line-height: .4rem;
     font-size: .16rem;
     cursor: pointer;
+    text-indent: 0.5em;
+    color:#2177ab;
+    font-family: fantasy;
+}
+.menu h5:not(:last-child){
+    border-bottom: 1px solid #c3c5bf;
 }
 .tools-content .title{
     font-size: .16rem;

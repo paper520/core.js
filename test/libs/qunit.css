@@ -100,7 +100,7 @@
 #qunit-tests li {
 	padding: 0.4em 1em 0.4em 1em;
 	border-bottom: 1px solid #FFF;
-	list-style-position: inside;
+    list-style-position: inside;
 }
 
 #qunit-tests > li {
