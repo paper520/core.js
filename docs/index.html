@@ -23,14 +23,22 @@
     </a>
     <div class="header">
         <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>@yelloxing/core.js</h2>
-        JavaScript核心接口
-        |
+        JavaScript核心接口 |
         <a href="./tools-api/index.html">查看工具</a>
     </div>
     <div class='menu' id='menu'>
         <div class="search">
             <i></i>
             <input type="text" placeholder="Type to filter" oninput='doSearch(this.value)'>
+        </div>
+        <div name='menu-frame'>
+            <h4 onclick='togger(this)'>Array</h4>
+            <ul>
+                <li onclick='toItem("concat")'>__.concat</li>
+                <li onclick='toItem("indexOf")'>__.indexOf</li>
+                <li onclick='toItem("lastIndexOf")'>__.lastIndexOf</li>
+                <li onclick='toItem("unique")'>__.unique</li>
+            </ul>
         </div>
         <div name='menu-frame'>
             <h4 onclick='togger(this)'>Lang</h4>
@@ -60,6 +68,118 @@
     </div>
 
     <div class='content' id='content'>
+        <h4>”Array“ 方法</h4>
+        <pre class='prettyprint lang-js' id='concat'>__.concat(...arrays);</pre>
+        <p>
+            创建一个新数组，把传递的数组或值拼接起来。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.2</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>arrays (...*)</em>: 连接的值（如果是数组会展开，值会作为一项）。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(Array)</em>: 返回连接后的新数组。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='indexOf'>__.indexOf(array, value[, fromIndex=0]);</pre>
+        <p>
+            使用
+            <a href="javascript:void(0)" onclick='toItem("eq")'>__.eq</a> 等值比较，返回首次 value 在数组array中被找到的 索引值。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.2</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>array (Array)</em>: 需要查找的数组。
+            </li>
+            <li>
+                <em>value (*)</em>: 需要查找的值。
+            </li>
+            <li>
+                <em>fromIndex (number)</em>: 开始查询的位置，可选，默认0。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(number)</em>: 返回 值value在数组中的索引位置, 没有找到为返回-1。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='lastIndexOf'>__.lastIndexOf(array, value[, fromIndex=array.length-1]);</pre>
+        <p>
+            使用
+            <a href="javascript:void(0)" onclick='toItem("eq")'>__.eq</a> 等值比较，从右到左遍历array，返回首次 value 在数组array中被找到的 索引值。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.2</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>array (Array)</em>: 需要查找的数组。
+            </li>
+            <li>
+                <em>value (*)</em>: 需要查找的值。
+            </li>
+            <li>
+                <em>fromIndex (number)</em>: 开始查询的位置，可选，默认array.length-1。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(number)</em>: 返回 值value在数组中的索引位置, 没有找到为返回-1。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='unique'>__.unique(array);</pre>
+        <p>
+            创建一个新数组，使用
+            <a href="javascript:void(0)" onclick='toItem("eq")'>__.eq</a> 等值比较，剔除重复的值。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.2</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>array (Array)</em>: 需要处理的数组。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(Array)</em>: 返回新数组。
+            </li>
+        </ul>
         <h4>”Lang“ 方法</h4>
         <pre class='prettyprint lang-js' id='eq'>__.eq(value, other);</pre>
         <p>

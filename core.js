@@ -1,3 +1,9 @@
+// Array
+import concat from './concat';
+import indexOf from './indexOf';
+import lastIndexOf from './lastIndexOf';
+import unique from './unique';
+
 // Lang
 import eq from './eq';
 import toString from './toString';
@@ -18,6 +24,11 @@ import get from './get';
 import set from './set';
 
 let __ = {
+
+    // Array
+    concat,
+    indexOf, lastIndexOf,
+    unique,
 
     // Lang
     eq,

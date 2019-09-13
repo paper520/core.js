@@ -5,22 +5,142 @@
 *
 * author 心叶
 *
-* version 0.2.1
+* version 0.2.2
 *
 * build Wed Aug 21 2019
 *
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Thu Sep 12 2019 23:10:50 GMT+0800 (GMT+08:00)
+* Date:Sat Sep 14 2019 00:53:03 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 (function () {
   'use strict';
+
+  var MAX_SAFE_INTEGER = 9007199254740991;
+  /**
+   * 判断是不是一个可以作为长度的整数（比如数组下标）
+   *
+   * @private
+   * @param {any} value 需要判断的值
+   * @returns {boolean} 如果是返回true，否则返回false
+   */
+
+  function isLength(value) {
+    return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+  }
+  /**
+   * 判断是不是一个类似数组的对象，是否可以通过length迭代
+   *
+   *
+   * @private
+   * @param {any} value 需要判断的值
+   * @returns {boolean} 如果是返回true，否则返回false
+   */
+
+
+  function isArrayLike(value) {
+    return value != null && typeof value != 'function' && isLength(value.length);
+  }
+
+  var toString = Object.prototype.toString;
+  /**
+   * 获取一个值的类型字符串[object type]
+   *
+   * @private
+   * @param {*} value 需要返回类型的值
+   * @returns {string} 返回类型字符串
+   */
+
+  function getType(value) {
+    if (value == null) {
+      return value === undefined ? '[object Undefined]' : '[object Null]';
+    }
+
+    return toString.call(value);
+  }
+  /**
+   * 判断一个值是不是String。
+   *
+   * @since V0.1.2
+   * @public
+   * @param {*} value 需要判断类型的值
+   * @returns {boolean} 如果是String返回true，否则返回false
+   */
+
+
+  function isString(value) {
+    var type = _typeof(value);
+
+    return type === 'string' || type === 'object' && value != null && !Array.isArray(value) && getType(value) === '[object String]';
+  }
+  /**
+   * 创建一个新数组，把传递的数组或值拼接起来。
+   *
+   * @since V0.2.2
+   * @public
+   * @param {*} value1 需要拼接的值1
+   * @param {*} value2 需要拼接的值2
+   * @param {*} value3 需要拼接的值3
+   * ...
+   * @returns {Array} 返回连接后的新数组。
+   * @example
+   *
+   * concat(1, [2,3])
+   * // => [1, 2, 3]
+   *
+   * concat([], [[1, 2], 3], false, '字符串')
+   * // => [1, 2, 3, false, '字符串']
+   *
+   * concat()
+   * // => []
+   */
+
+
+  var concat = function concat(newArray, values) {
+    for (var i = 0; i < values.length; i++) {
+      if (isArrayLike(values[i]) && // 字符串比较特殊，我们不希望别划分
+      !isString(values[i])) {
+        if (values[i].length > 1) {
+          concat(newArray, values[i]);
+        } else if (values[i].length === 1) {
+          newArray.push(values[i][0]);
+        }
+      } else {
+        newArray.push(values[i]);
+      }
+    }
+  };
+
+  function concat$1() {
+    var newArray = [];
+
+    for (var _len = arguments.length, values = new Array(_len), _key = 0; _key < _len; _key++) {
+      values[_key] = arguments[_key];
+    }
+
+    concat(newArray, values);
+    return newArray;
+  }
   /**
    * 比较二个值是否相等
    *
@@ -50,25 +170,144 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
    * // => true
    */
 
+
   function eq(value, other) {
     return value === other || value !== value && other !== other;
   }
-
-  var toString = Object.prototype.toString;
   /**
-   * 获取一个值的类型字符串[object type]
+   * 返回首次 value 在数组array中被找到的 索引值。
    *
-   * @private
-   * @param {*} value 需要返回类型的值
-   * @returns {string} 返回类型字符串
+   * @since V0.2.2
+   * @public
+   * @param {Array} array 需要查找的数组
+   * @param {*} value 需要查找的值
+   * @param {number} fromIndex 开始查询的位置，可选，默认0
+   * @returns {number} 返回 值value在数组中的索引位置, 没有找到为返回-1。
+   * @example
+   *
+   * var array=[1, 2, 3, 2]
+   *
+   * indexOf(array, 2)
+   * // => 1
+   *
+   * indexOf(array, 2, 2)
+   * // => 3
+   *
+   * indexOf(array, 12)
+   * // => -1
+   *
    */
 
-  function getType(value) {
-    if (value == null) {
-      return value === undefined ? '[object Undefined]' : '[object Null]';
+
+  function indexOf(array, value, fromIndex) {
+    if (!isArrayLike(array)) {
+      return -1;
+    } // 如果起点传递错误或没有传递，修复为0
+
+
+    if (!isLength(fromIndex) || fromIndex < 0) {
+      fromIndex = 0;
     }
 
-    return toString.call(value);
+    for (; fromIndex < array.length; fromIndex++) {
+      if (eq(array[fromIndex], value)) {
+        return fromIndex;
+      }
+    }
+
+    return -1;
+  }
+  /**
+   * 从右到左遍历array，返回首次 value 在数组array中被找到的 索引值。
+   *
+   * @since V0.2.2
+   * @public
+   * @param {Array} array 需要查找的数组
+   * @param {*} value 需要查找的值
+   * @param {number} fromIndex 开始查询的位置，可选，默认array.length-1
+   * @returns {number} 返回 值value在数组中的索引位置, 没有找到为返回-1。
+   * @example
+   *
+   * var array=[1, 2, 3, 2]
+   *
+   * lastIndexOf(array, 2)
+   * // => 3
+   *
+   * lastIndexOf(array, 2, 2)
+   * // => 1
+   *
+   * lastIndexOf(array, 12)
+   * // => -1
+   *
+   */
+
+
+  function lastIndexOf(array, value, fromIndex) {
+    if (!isArrayLike(array)) {
+      return -1;
+    } // 如果起点传递错误或没有传递，修复为0
+
+
+    if (!isLength(fromIndex) || fromIndex > array.length - 1) {
+      fromIndex = array.length - 1;
+    }
+
+    for (; fromIndex > -1; fromIndex--) {
+      if (eq(array[fromIndex], value)) {
+        return fromIndex;
+      }
+    }
+
+    return -1;
+  }
+  /**
+   * 创建一个新数组，剔除重复的值。
+   *
+   * @since V0.2.2
+   * @public
+   * @param {Array} array 需要处理的数组。
+   * @returns {Array} 返回新数组。
+   * @example
+   *
+   * unique([1, 2, 3, 2])
+   * // => [1, 2, 3]
+   */
+
+
+  function unique(array) {
+    if (!isArrayLike(array)) {
+      return array;
+    }
+
+    if (array.length === 0) {
+      return [];
+    }
+
+    if (array.length === 1) {
+      return [array[0]];
+    }
+
+    var newArray = [],
+        help = _construct(Array, _toConsumableArray(array));
+
+    while (help.length > 0) {
+      // 第一个肯定是需要的
+      newArray.push(help[0]);
+      var value = help[0],
+          j = -1; // 保留和第一个不一样的
+
+      for (var i = 1; i < help.length; i++) {
+        if (!eq(value, help[i])) {
+          help[j + 1] = help[i];
+          j += 1;
+        }
+      } // 余下的都删除了(不需要真删除，修改length即可)
+
+
+      help.length = j + 1;
+    }
+
+    return newArray;
   }
   /**
    * 判断一个值是不是symbol。
@@ -84,21 +323,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     var type = _typeof(value);
 
     return type === 'symbol' || type === 'object' && value !== null && getType(value) === '[object Symbol]';
-  }
-  /**
-   * 判断一个值是不是String。
-   *
-   * @since V0.1.2
-   * @public
-   * @param {*} value 需要判断类型的值
-   * @returns {boolean} 如果是String返回true，否则返回false
-   */
-
-
-  function isString(value) {
-    var type = _typeof(value);
-
-    return type === 'string' || type === 'object' && value != null && !Array.isArray(value) && getType(value) === '[object String]';
   }
 
   var symbolToString = Symbol.prototype.toString;
@@ -551,10 +775,15 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   function set(object, path, value, customizer) {
     customizer = typeof customizer === 'function' ? customizer : undefined;
     return object == null ? object : baseSet(object, path, value, customizer);
-  } // Lang
+  } // Array
 
 
   var __ = {
+    // Array
+    concat: concat$1,
+    indexOf: indexOf,
+    lastIndexOf: lastIndexOf,
+    unique: unique,
     // Lang
     eq: eq,
     toString: toString$1,
