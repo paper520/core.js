@@ -65,6 +65,12 @@
                 <li onclick='toItem("set")'>__.set</li>
             </ul>
         </div>
+        <div name='menu-frame'>
+            <h4 onclick='togger(this)'>String</h4>
+            <ul>
+                <li onclick='toItem("split")'>__.split</li>
+            </ul>
+        </div>
     </div>
 
     <div class='content' id='content'>
@@ -563,6 +569,34 @@
         <ul>
             <li>
                 <em>(Object)</em>: 返回 object。
+            </li>
+        </ul>
+        <h4>”String“ 方法</h4>
+        <pre class='prettyprint lang-js' id='split'>__.split(str, splitStr);</pre>
+        <p>
+            创建一个新数组，使用指定字符切割字符串保存其中。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.3</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>str (string)</em>: 切割的字符串（如果不是字符串，会先被转成字符串）。
+            </li>
+            <li>
+                <em>splitStr (*)</em>: 割符号。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(Array)</em>: 返回切割后的数组。
             </li>
         </ul>
     </div>

@@ -23,6 +23,9 @@ import isUndefined from './isUndefined';
 import get from './get';
 import set from './set';
 
+// String
+import split from './split';
+
 let __ = {
 
     // Array
@@ -37,7 +40,10 @@ let __ = {
     isError, isNull, isNumber, isUndefined,
 
     // Object
-    get, set
+    get, set,
+
+    // String
+    split
 
 };
 
