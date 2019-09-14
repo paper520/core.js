@@ -12,7 +12,7 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Sat Sep 14 2019 00:53:03 GMT+0800 (GMT+08:00)
+* Date:Sat Sep 14 2019 12:38:03 GMT+0800 (GMT+08:00)
 */
 
 (function () {
@@ -80,6 +80,21 @@
     }
 
     /**
+     * 和isArrayLike类似，不过特别排除以下类型：
+     *  1.字符串
+     *
+     * @private
+     * @param {any} value 需要判断的值
+     * @returns {boolean} 如果是返回true，否则返回false
+     */
+
+    function isArraySpec (value) {
+
+        return isArrayLike(value) && !isString(value);
+
+    }
+
+    /**
      * 创建一个新数组，把传递的数组或值拼接起来。
      *
      * @since V0.2.2
@@ -102,9 +117,7 @@
      */
     let concat = function (newArray, values) {
         for (let i = 0; i < values.length; i++) {
-            if (isArrayLike(values[i]) &&
-                // 字符串比较特殊，我们不希望别划分
-                !isString(values[i])) {
+            if (isArraySpec(values[i])) {
                 if (values[i].length > 1) {
                     concat(newArray, values[i]);
                 } else if (values[i].length === 1) {
@@ -256,7 +269,7 @@
      */
     function unique (array) {
 
-        if (!isArrayLike(array)) {
+        if (!isArraySpec(array)) {
             return array;
         }
 

@@ -12,6 +12,40 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
+* Date:Sat Sep 14 2019 12:38:03 GMT+0800 (GMT+08:00)
+*/
+
+
+/*!
+* @yelloxing/core.js - 🐠 A modern JavaScript utility library delivering modularity, performance, &amp; extras.
+* git+https://github.com/yelloxing/core.js.git
+*
+* author 心叶
+*
+* version 0.2.2
+*
+* build Wed Aug 21 2019
+*
+* Copyright yelloxing
+* Released under the MIT license
+*
+* Date:Sat Sep 14 2019 12:26:29 GMT+0800 (GMT+08:00)
+*/
+
+
+/*!
+* @yelloxing/core.js - 🐠 A modern JavaScript utility library delivering modularity, performance, &amp; extras.
+* git+https://github.com/yelloxing/core.js.git
+*
+* author 心叶
+*
+* version 0.2.2
+*
+* build Wed Aug 21 2019
+*
+* Copyright yelloxing
+* Released under the MIT license
+*
 * Date:Sat Sep 14 2019 00:53:03 GMT+0800 (GMT+08:00)
 */
 
