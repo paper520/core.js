@@ -19,6 +19,10 @@ import isNull from './isNull';
 import isNumber from './isNumber';
 import isUndefined from './isUndefined';
 
+// Math
+import max from './max';
+import min from './min';
+
 // Object
 import get from './get';
 import set from './set';
@@ -38,6 +42,9 @@ let __ = {
     toString,
     isObject, isSymbol, isString, isBoolean, isElement, isText, isFunction,
     isError, isNull, isNumber, isUndefined,
+
+    // Math
+    max, min,
 
     // Object
     get, set,

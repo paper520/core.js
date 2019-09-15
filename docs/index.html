@@ -59,6 +59,13 @@
             </ul>
         </div>
         <div name='menu-frame'>
+            <h4 onclick='togger(this)'>Math</h4>
+            <ul>
+                <li onclick='toItem("max")'>__.max</li>
+                <li onclick='toItem("min")'>__.min</li>
+            </ul>
+        </div>
+        <div name='menu-frame'>
             <h4 onclick='togger(this)'>Object</h4>
             <ul>
                 <li onclick='toItem("get")'>__.get</li>
@@ -506,8 +513,55 @@
                 <em>(string)</em>:返回转换后的字符串。
             </li>
         </ul>
+        <h4>”Math“ 方法</h4>
+        <pre class='prettyprint lang-js' id='max'>__.max(array[, valback]);</pre>
+        <p>
+            计算 array 中的最大值。 如果 array 不是数组，空的或者假值将会返回 undefined。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.4</li>
+        </ul>
+        <h5>参数</h5>
+        <ul>
+            <li>
+                <em>array (Array)</em>: 要迭代的数组。
+            </li>
+            <li>
+                <em>valback (Function)</em>: 可修改比较值的函数，可选。
+            </li>
+        </ul>
+        <h5>返回</h5>
+        <ul>
+            <li>
+                <em>(*)</em>: 返回最大值（即使传递函数修改比较值，返回的依旧是原始值）。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='min'>__.min(array[, valback]);</pre>
+        <p>
+            计算 array 中的最小值。 如果 array 不是数组，空的或者假值将会返回 undefined。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.4</li>
+        </ul>
+        <h5>参数</h5>
+        <ul>
+            <li>
+                <em>array (Array)</em>: 要迭代的数组。
+            </li>
+            <li>
+                <em>valback (Function)</em>: 可修改比较值的函数，可选。
+            </li>
+        </ul>
+        <h5>返回</h5>
+        <ul>
+            <li>
+                <em>(*)</em>: 返回最小值（即使传递函数修改比较值，返回的依旧是原始值）。
+            </li>
+        </ul>
         <h4>”Object“ 方法</h4>
-        <pre class='prettyprint lang-js' id='get'>__.get(object, path, [defaultValue]);</pre>
+        <pre class='prettyprint lang-js' id='get'>__.get(object, path[, defaultValue]);</pre>
         <p>
             根据 object对象的path路径获取值。 如果解析 value 是 undefined 会以 defaultValue 取代。
         </p>
@@ -534,7 +588,7 @@
                 <em>(*)</em>: 返回解析的值。
             </li>
         </ul>
-        <pre class='prettyprint lang-js' id='set'>__.set(object, path, value, [customizer]);</pre>
+        <pre class='prettyprint lang-js' id='set'>__.set(object, path, value[, customizer]);</pre>
         <p>
             设置 object对象中对应 path 属性路径上的值，如果path不存在，则创建。它接受一个 customizer，调用生成对象的 path。 如果 customizer 返回 undefined 将会使用{}代替。customizer 调用3个参数：
             (nsValue, key, nsObject)。

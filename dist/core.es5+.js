@@ -5,14 +5,14 @@
 *
 * author 心叶
 *
-* version 0.2.3
+* version 0.2.4
 *
 * build Wed Aug 21 2019
 *
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Sat Sep 14 2019 17:05:00 GMT+0800 (GMT+08:00)
+* Date:Sun Sep 15 2019 17:09:43 GMT+0800 (GMT+08:00)
 */
 
 (function () {
@@ -541,6 +541,98 @@
     }
 
     /**
+     * 计算数组中的最大值（可以传递一个求值函数，可选）。
+     *
+     * @since V0.2.4
+     * @public
+     * @param {Array} array 需要遍历的数组
+     * @param {Function} valback 需要查找的值
+     * @returns {*} 返回最大的值。
+     * @example
+     *
+     * max([10, 2, 19, 3, 5, 7])
+     * //=> 19
+     *
+     * max([10, 2, 19, 3, 5, 7], function (value, index) {
+     *    return -1 * value;
+     * })
+     * //=> 2
+     */
+    function max (array, valback) {
+
+        if (!isArrayLike(array) || array.length < 1) {
+            return undefined;
+        }
+
+        if (valback) {
+            let maxIndex = 0, maxValue = valback(array[0], 0), temp;
+            for (let index = 1; index < array.length; index++) {
+                temp = valback(array[index], index);
+                if (temp > maxValue) {
+                    maxValue = temp;
+                    maxIndex = index;
+                }
+            }
+            return array[maxIndex];
+        } else {
+            let maxIndex = 0;
+            for (let index = 1; index < array.length; index++) {
+                if (array[index] > array[maxIndex]) {
+                    maxIndex = index;
+                }
+            }
+            return array[maxIndex];
+        }
+
+    }
+
+    /**
+     * 计算数组中的最小值（可以传递一个求值函数，可选）。
+     *
+     * @since V0.2.4
+     * @public
+     * @param {Array} array 需要遍历的数组
+     * @param {Function} valback 需要查找的值
+     * @returns {*} 返回最小的值。
+     * @example
+     *
+     * min([10, 2, 19, 3, 5, 7])
+     * //=> 2
+     *
+     * min([10, 2, 19, 3, 5, 7], function (value, index) {
+     *    return -1 * value;
+     * })
+     * //=> 19
+     */
+    function min (array, valback) {
+
+        if (!isArrayLike(array) || array.length < 1) {
+            return undefined;
+        }
+
+        if (valback) {
+            let minIndex = 0, minValue = valback(array[0], 0), temp;
+            for (let index = 1; index < array.length; index++) {
+                temp = valback(array[index], index);
+                if (temp < minValue) {
+                    minValue = temp;
+                    minIndex = index;
+                }
+            }
+            return array[minIndex];
+        } else {
+            let minIndex = 0;
+            for (let index = 1; index < array.length; index++) {
+                if (array[index] < array[minIndex]) {
+                    minIndex = index;
+                }
+            }
+            return array[minIndex];
+        }
+
+    }
+
+    /**
      * 判断是不是一个对象上的属性
      *
      * @private
@@ -808,6 +900,9 @@
         toString: toString$1,
         isObject, isSymbol, isString, isBoolean, isElement, isText, isFunction,
         isError, isNull, isNumber, isUndefined,
+
+        // Math
+        max, min,
 
         // Object
         get, set,
