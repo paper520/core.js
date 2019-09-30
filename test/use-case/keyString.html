@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="../../docs/logo.png">
+    <script src="./script.js"></script>
+    <script src="../../dist/core.tools.js"></script>
+    <title>用例测试 | core.js</title>
+    <script>
+        function keydown(event) {
+            event = event || window.event;
+            window.__helps.stopPropagation(event);
+            window.__helps.preventDefault(event);
+            console.log("此刻按下的快捷键是:" + __tools.keyString(event));
+        }
+    </script>
+</head>
+
+<body onkeydown="keydown()"></body>
+
+</html>
