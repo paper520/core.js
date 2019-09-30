@@ -47,7 +47,7 @@ export default function (event) {
 
     let resultKey = "";
 
-    if (help_key.indexOf(key[0]) >= 0) {
+    if (help_key.indexOf(key[0]) >= 0 && key[0] !== 'lock') {
         key[0] = key[1] = "";
     }
 

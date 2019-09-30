@@ -1,20 +1,3 @@
-
-/*!
-* @yelloxing/core.js - 🐠 A modern JavaScript utility library delivering modularity, performance, &amp; extras.
-* git+https://github.com/yelloxing/core.js.git
-*
-* author 心叶
-*
-* version 0.2.5
-*
-* build Wed Aug 21 2019
-*
-* Copyright yelloxing
-* Released under the MIT license
-*
-* Date:Mon Sep 30 2019 09:43:47 GMT+0800 (GMT+08:00)
-*/
-
 "use strict";
 
 (function () {
@@ -534,7 +517,7 @@
         ctrl = event.ctrlKey ? "ctrl+" : "";
     var resultKey = "";
 
-    if (help_key.indexOf(key[0]) >= 0) {
+    if (help_key.indexOf(key[0]) >= 0 && key[0] !== 'lock') {
       key[0] = key[1] = "";
     }
 
