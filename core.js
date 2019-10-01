@@ -30,6 +30,17 @@ import set from './set';
 // String
 import split from './split';
 
+/**
+ * 工具类方法
+ * ------------------
+ */
+
+import animation from './tools/animation';
+import Hermite from './tools/Hermite';
+import keyString from './tools/keyString';
+import Matrix4 from './tools/Matrix4';
+import tree from './tools/tree';
+
 let __ = {
 
     // Array
@@ -50,8 +61,18 @@ let __ = {
     get, set,
 
     // String
-    split
+    split,
 
+    /**
+     * 挂载工具
+     * ----------
+     */
+
+    animation,
+    Hermite,
+    keyString,
+    Matrix4,
+    tree
 };
 
 // 判断当前环境，如果不是浏览器环境

@@ -1,21 +1,17 @@
 {
   "name": "@yelloxing/core.js",
-  "version": "0.2.6",
-  "description": "🐠 A modern JavaScript utility library delivering modularity, performance, &amp; extras.",
+  "version": "0.3.0",
+  "description": "🐠 A modern JavaScript utility library delivering modularity, performance, & extras.",
   "main": "dist/core.min.js",
   "module": "dist/core.min.js",
   "sideEffects": false,
   "scripts": {
     "start": "npm install && npm run build",
-    "build": "npm run build-core && npm run build-tools",
-    "build-core": "npm run build-core:bundle && npm run build-core:babel && npm run build-core:uglify && node ./scripts/prependBanner.js",
-    "build-core:bundle": "rollup core.js --file dist/core.es5+.js --format iife --name 'bundle'",
-    "build-core:babel": "npx babel dist/core.es5+.js --out-file dist/core.js",
-    "build-core:uglify": "uglifyjs dist/core.js -o dist/core.min.js",
-    "build-tools:bundle": "rollup test/.temp/index.js --file test/.temp/tools.es5+.js --format iife --name 'bundle'",
-    "build-tools:babel": "npx babel test/.temp/tools.es5+.js --out-file test/.temp/tools.js",
-    "build-tools": "npm run build-tools:bundle && npm run build-tools:babel",
-    "postinstall": "node ./scripts/postinstall.js || echo \"ignore\""
+    "build": "npm run build:bundle && npm run build:babel && npm run build:uglify && node ./scripts/prependBanner.js",
+    "build:bundle": "rollup core.js --file dist/core.es5+.js --format iife --name 'bundle'",
+    "build:babel": "npx babel dist/core.es5+.js --out-file dist/core.js",
+    "build:uglify": "uglifyjs dist/core.js -o dist/core.min.js",
+    "postinstall": "node ./scripts/postinstall.js"
   },
   "repository": {
     "type": "git",

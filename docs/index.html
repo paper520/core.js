@@ -15,9 +15,36 @@
     <link rel="stylesheet" href="./plugins/prettify.css">
     <script src="./plugins/prettify.js"></script>
     <script src="./libs/script.js"></script>
+    <script>
+
+        // 具体的通知内容
+        function doNotify() {
+            var notification = new Notification('你有一条新信息', {
+                body: "v0.3.0之后的版本才把核心工具打包到core.js中！",
+                icon: "./logo.png"
+            });
+            setTimeout(function () { notification.close(); }, 5000);
+        }
+
+        // 通知一些重要事情
+        function notify() {
+            if (window.Notification) {
+                if (window.Notification.permission == "granted") {
+                    doNotify();
+                } else {
+                    window.Notification.requestPermission(function (permission) {
+                        if (permission == 'granted') {
+                            doNotify();
+                        }
+                    });
+                }
+            }
+        }
+
+    </script>
 </head>
 
-<body onload="prettyPrint();adjustScroll();initMenus();">
+<body onload="prettyPrint();adjustScroll();initMenus();notify()">
     <a href="https://github.com/yelloxing/core.js" class="github" target="_blank">
         Fork me on Github
     </a>
