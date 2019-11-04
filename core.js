@@ -7,6 +7,7 @@ import unique from './unique';
 // Lang
 import eq from './eq';
 import toString from './toString';
+import isArray from './isArray';
 import isObject from './isObject';
 import isSymbol from './isSymbol';
 import isString from './isString';
@@ -52,7 +53,7 @@ let __ = {
     eq,
     toString,
     isObject, isSymbol, isString, isBoolean, isElement, isText, isFunction,
-    isError, isNull, isNumber, isUndefined,
+    isError, isNull, isNumber, isUndefined, isArray,
 
     // Math
     max, min,

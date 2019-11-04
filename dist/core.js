@@ -5,14 +5,14 @@
 *
 * author 心叶
 *
-* version 0.3.0
+* version 0.3.1
 *
 * build Wed Aug 21 2019
 *
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Tue Oct 01 2019 11:19:31 GMT+0800 (GMT+08:00)
+* Date:Mon Nov 04 2019 15:11:49 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
@@ -135,7 +135,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         if (values[i].length > 1) {
           concat(newArray, values[i]);
         } else if (values[i].length === 1) {
-          newArray.push(values[i][0]);
+          concat(newArray, values[i][0]);
         }
       } else {
         newArray.push(values[i]);
@@ -407,6 +407,24 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     var result = "".concat(value); // 针对数字-0特殊除了，防止变成字符串"0"
 
     return result === '0' && 1 / value === -INFINITY ? "-0" : result;
+  }
+  /**
+   * 判断一个值是不是数组。
+   *
+   * @since V0.3.1
+   * @public
+   * @param {*} value 需要判断类型的值
+   * @param {boolean} notStrict 是否不严格检查类型（默认false，如果为true表示判断是不是一个类似数组的类型）
+   * @returns {boolean} 如果是数组返回true，否则返回false
+   */
+
+
+  function isArray(value, notStrict) {
+    if (notStrict) {
+      return isArraySpec(value);
+    }
+
+    return Array.isArray(value);
   }
   /**
    * 判断一个值是不是Object。
@@ -1583,6 +1601,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     isNull: isNull,
     isNumber: isNumber,
     isUndefined: isUndefined,
+    isArray: isArray,
     // Math
     max: max,
     min: min,

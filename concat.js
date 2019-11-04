@@ -27,7 +27,7 @@ let concat = function (newArray, values) {
             if (values[i].length > 1) {
                 concat(newArray, values[i]);
             } else if (values[i].length === 1) {
-                newArray.push(values[i][0]);
+                concat(newArray, values[i][0]);
             }
         } else {
             newArray.push(values[i]);

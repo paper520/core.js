@@ -49,7 +49,8 @@
         Fork me on Github
     </a>
     <div class="header">
-        <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>@yelloxing/core.js</h2>
+        <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>
+            @yelloxing/core.js</h2>
         JavaScript核心接口 |
         <a href="./tools-api/index.html">查看工具</a>
     </div>
@@ -71,6 +72,7 @@
             <h4 onclick='togger(this)'>Lang</h4>
             <ul>
                 <li onclick='toItem("eq")'>__.eq</li>
+                <li onclick='toItem("isArray")'>__.isArray</li>
                 <li onclick='toItem("isBoolean")'>__.isBoolean</li>
                 <li onclick='toItem("isElement")'>__.isElement</li>
                 <li onclick='toItem("isError")'>__.isError</li>
@@ -164,7 +166,8 @@
                 <em>(number)</em>: 返回 值value在数组中的索引位置, 没有找到为返回-1。
             </li>
         </ul>
-        <pre class='prettyprint lang-js' id='lastIndexOf'>__.lastIndexOf(array, value[, fromIndex=array.length-1]);</pre>
+        <pre class='prettyprint lang-js'
+            id='lastIndexOf'>__.lastIndexOf(array, value[, fromIndex=array.length-1]);</pre>
         <p>
             使用
             <a href="javascript:void(0)" onclick='toItem("eq")'>__.eq</a> 等值比较，从右到左遍历array，返回首次 value 在数组array中被找到的 索引值。
@@ -224,7 +227,8 @@
         <pre class='prettyprint lang-js' id='eq'>__.eq(value, other);</pre>
         <p>
             比较两者的值，来确定它们是否相等(这里遵循
-            <a href='http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero' target="_blank">SameValueZero</a>规则)。
+            <a href='http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero'
+                target="_blank">SameValueZero</a>规则)。
         </p>
         <h5>开始版本</h5>
         <ul>
@@ -247,6 +251,33 @@
         <ul>
             <li>
                 <em>(boolean)</em>: 如果两个值相等返回 true ，否则返回 false 。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isArray'>__.isArray(value[, notStrict]);</pre>
+        <p>
+            检查 value 是否是原始 数组 类型或广泛的数组。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.3.1</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+            <li>
+                <em>notStrict (boolean)</em>: 是否不需要严格类型检测，默认false表示需要。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个数组（notStrict为true时是更广泛的数组类型），那么返回 true，否则返回 false。
             </li>
         </ul>
         <pre class='prettyprint lang-js' id='isBoolean'>__.isBoolean(value);</pre>
@@ -617,7 +648,8 @@
         </ul>
         <pre class='prettyprint lang-js' id='set'>__.set(object, path, value[, customizer]);</pre>
         <p>
-            设置 object对象中对应 path 属性路径上的值，如果path不存在，则创建。它接受一个 customizer，调用生成对象的 path。 如果 customizer 返回 undefined 将会使用{}代替。customizer 调用3个参数：
+            设置 object对象中对应 path 属性路径上的值，如果path不存在，则创建。它接受一个 customizer，调用生成对象的 path。 如果 customizer 返回 undefined
+            将会使用{}代替。customizer 调用3个参数：
             (nsValue, key, nsObject)。
         </p>
         <p class='warn'>

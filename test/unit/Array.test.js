@@ -1,4 +1,4 @@
-QUnit.test('concat', 11, function () {
+QUnit.test('concat', 12, function () {
 
     var temp1 = __.concat(1, [2, 3]);
     equal(temp1.length, 3);
@@ -16,6 +16,7 @@ QUnit.test('concat', 11, function () {
 
     equal(__.concat().length, 0);
 
+    equal(__.concat([[1, 2, 3]]).length, 3);
 });
 
 QUnit.test('indexOf', 3, function () {
