@@ -12,10 +12,12 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Thu Nov 07 2019 17:29:08 GMT+0800 (GMT+08:00)
+* Date:Tue Nov 19 2019 23:20:33 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
@@ -35,6 +37,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 (function () {
   'use strict';
+
+  var _dictionary;
 
   var MAX_SAFE_INTEGER = 9007199254740991;
   /**
@@ -1140,7 +1144,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   } // 字典表
 
 
-  var dictionary = {
+  var dictionary = (_dictionary = {
     // 数字
     48: [0, ')'],
     49: [1, '!'],
@@ -1184,50 +1188,30 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     38: "up",
     39: "right",
     40: "down",
-    33: "pre",
-    34: "next",
-    35: "bottom",
-    36: "top",
+    33: "page up",
+    34: "page down",
+    35: "end",
+    36: "home",
     // 控制键
     16: "shift",
     17: "ctrl",
     18: "alt",
-    91: "ctrl",
-    93: "ctrl",
+    91: "command left",
+    93: "command right",
     9: "tab",
-    20: "lock",
+    20: "caps lock",
     32: "spacebar",
     8: "delete",
     13: "enter",
     27: "esc",
-    // 功能键
-    112: "f1",
-    113: "f2",
-    114: "f3",
-    115: "f4",
-    116: "f5",
-    117: "f6",
-    118: "f7",
-    119: "f8",
-    120: "f9",
-    121: "f10",
-    122: "f11",
-    123: "f12",
-    // 余下键
-    189: ["-", "_"],
-    187: ["=", "+"],
-    219: ["[", "{"],
-    221: ["]", "}"],
-    220: ["\\", "|"],
-    186: [";", ":"],
-    222: ["'", '"'],
-    188: [",", "<"],
-    190: [".", ">"],
-    191: ["/", "?"],
-    192: ["`", "~"]
-  }; // 非独立键字典
+    46: "delete",
+    45: "insert",
+    144: "number lock",
+    145: "screen lock",
+    12: "clear"
+  }, _defineProperty(_dictionary, "45", "insert"), _defineProperty(_dictionary, 112, "f1"), _defineProperty(_dictionary, 113, "f2"), _defineProperty(_dictionary, 114, "f3"), _defineProperty(_dictionary, 115, "f4"), _defineProperty(_dictionary, 116, "f5"), _defineProperty(_dictionary, 117, "f6"), _defineProperty(_dictionary, 118, "f7"), _defineProperty(_dictionary, 119, "f8"), _defineProperty(_dictionary, 120, "f9"), _defineProperty(_dictionary, 121, "f10"), _defineProperty(_dictionary, 122, "f11"), _defineProperty(_dictionary, 123, "f12"), _defineProperty(_dictionary, 189, ["-", "_"]), _defineProperty(_dictionary, 187, ["=", "+"]), _defineProperty(_dictionary, 219, ["[", "{"]), _defineProperty(_dictionary, 221, ["]", "}"]), _defineProperty(_dictionary, 220, ["\\", "|"]), _defineProperty(_dictionary, 186, [";", ":"]), _defineProperty(_dictionary, 222, ["'", '"']), _defineProperty(_dictionary, 188, [",", "<"]), _defineProperty(_dictionary, 190, [".", ">"]), _defineProperty(_dictionary, 191, ["/", "?"]), _defineProperty(_dictionary, 192, ["`", "~"]), _dictionary); // 非独立键字典
 
-  var help_key = ["shift", "ctrl", "alt", "lock"];
+  var help_key = ["shift", "ctrl", "alt"];
   /**
    * 键盘按键
    * 返回键盘此时按下的键的组合结果
@@ -1237,6 +1221,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   function keyString(event) {
     event = event || window.event;
+    console.log(event);
     var keycode = event.keyCode || event.which;
     var key = dictionary[keycode] || keycode;
     if (!key) return;
@@ -1246,12 +1231,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         ctrl = event.ctrlKey ? "ctrl+" : "";
     var resultKey = "";
 
-    if (help_key.indexOf(key[0]) >= 0 && key[0] !== 'lock') {
+    if (help_key.indexOf(key[0]) >= 0) {
       key[0] = key[1] = "";
-    }
+    } // 判断是否按下了caps lock
 
-    resultKey = (ctrl + shift + alt + ( // 判断是否按下了caps lock
-    event.code == "Key" + event.key && !shift ? key[1] : key[0])).replace(/\+$/, "") || 'ctrl';
+
+    var lockPress = event.code == "Key" + event.key && !shift;
+    resultKey = (ctrl + shift + alt + (lockPress ? key[1] : key[0])).replace(/\+$/, "") || 'ctrl';
     return resultKey;
   }
   /**

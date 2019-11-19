@@ -12,7 +12,7 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Thu Nov 07 2019 17:29:08 GMT+0800 (GMT+08:00)
+* Date:Tue Nov 19 2019 23:20:33 GMT+0800 (GMT+08:00)
 */
 
 (function () {
@@ -1103,10 +1103,11 @@
 
         // 方向
         37: "left", 38: "up", 39: "right", 40: "down",
-        33: "pre", 34: "next", 35: "bottom", 36: "top",
+        33: "page up", 34: "page down", 35: "end", 36: "home",
 
         // 控制键
-        16: "shift", 17: "ctrl", 18: "alt", 91: "ctrl", 93: "ctrl", 9: "tab", 20: "lock", 32: "spacebar", 8: "delete", 13: "enter", 27: "esc",
+        16: "shift", 17: "ctrl", 18: "alt", 91: "command left", 93: "command right", 9: "tab", 20: "caps lock", 32: "spacebar", 8: "delete", 13: "enter", 27: "esc",
+        46: "delete", 45: "insert", 144: "number lock", 145: "screen lock", 12: "clear", 45: "insert",
 
         // 功能键
         112: "f1", 113: "f2", 114: "f3", 115: "f4", 116: "f5", 117: "f6", 118: "f7", 119: "f8", 120: "f9", 121: "f10", 122: "f11", 123: "f12",
@@ -1117,7 +1118,7 @@
     };
 
     // 非独立键字典
-    let help_key = ["shift", "ctrl", "alt", "lock"];
+    let help_key = ["shift", "ctrl", "alt"];
 
     /**
      * 键盘按键
@@ -1127,6 +1128,7 @@
      */
     function keyString (event) {
         event = event || window.event;
+        console.log(event);
 
         let keycode = event.keyCode || event.which;
         let key = dictionary[keycode] || keycode;
@@ -1138,13 +1140,14 @@
 
         let resultKey = "";
 
-        if (help_key.indexOf(key[0]) >= 0 && key[0] !== 'lock') {
+        if (help_key.indexOf(key[0]) >= 0) {
             key[0] = key[1] = "";
         }
 
-        resultKey = (ctrl + shift + alt + (
-            // 判断是否按下了caps lock
-            (event.code == "Key" + event.key && !shift) ? key[1] : key[0])).replace(/\+$/, "") || 'ctrl';
+        // 判断是否按下了caps lock
+        let lockPress = event.code == "Key" + event.key && !shift;
+
+        resultKey = (ctrl + shift + alt + (lockPress ? key[1] : key[0])).replace(/\+$/, "") || 'ctrl';
 
         return resultKey;
     }
