@@ -1,6 +1,6 @@
 {
   "name": "@yelloxing/core.js",
-  "version": "0.3.3",
+  "version": "0.3.5",
   "description": "🐠 A modern JavaScript utility library delivering modularity, performance, & extras.",
   "main": "dist/core.min.js",
   "module": "dist/core.min.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npm install && npm run build",
     "build": "npm run clean && npm run build:bundle && npm run build:babel && npm run build:uglify && node ./scripts/prependBanner.js",
-    "build:bundle": "rollup core.js --file dist/core.es5+.js --format iife --name 'bundle'",
+    "build:bundle": "rollup core.js --file dist/core.es5+.js --format iife --name 'core.js'",
     "build:babel": "npx babel dist/core.es5+.js --out-file dist/core.js",
     "build:uglify": "uglifyjs dist/core.js -o dist/core.min.js",
     "clean": "cuf -d ./dist",
@@ -33,7 +33,7 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "cuf": "^1.0.3",
+    "cuf": "^1.1.3",
     "rollup": "^1.20.0",
     "uglify-js": "^3.6.0"
   }

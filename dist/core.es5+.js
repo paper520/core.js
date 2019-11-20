@@ -5,14 +5,14 @@
 *
 * author 心叶
 *
-* version 0.3.3
+* version 0.3.5
 *
 * build Wed Aug 21 2019
 *
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Tue Nov 19 2019 23:25:32 GMT+0800 (GMT+08:00)
+* Date:Wed Nov 20 2019 10:42:46 GMT+0800 (GMT+08:00)
 */
 
 (function () {
@@ -1094,6 +1094,8 @@
 
         // 数字
         48: [0, ')'], 49: [1, '!'], 50: [2, '@'], 51: [3, '#'], 52: [4, '$'], 53: [5, '%'], 54: [6, '^'], 55: [7, '&'], 56: [8, '*'], 57: [9, '('],
+        96:[0,0], 97:1, 98:2, 99:3, 100:4, 101:5, 102:6, 103:7, 104:8, 105:9,
+        106:"*", 107:"+", 109:"-", 110:".", 111:"/",
 
         // 字母
         65: ["a", "A"], 66: ["b", "B"], 67: ["c", "C"], 68: ["d", "D"], 69: ["e", "E"], 70: ["f", "F"], 71: ["g", "G"],
@@ -1106,8 +1108,9 @@
         33: "page up", 34: "page down", 35: "end", 36: "home",
 
         // 控制键
-        16: "shift", 17: "ctrl", 18: "alt", 91: "command left", 93: "command right", 9: "tab", 20: "caps lock", 32: "spacebar", 8: "delete", 13: "enter", 27: "esc",
-        46: "delete", 45: "insert", 144: "number lock", 145: "screen lock", 12: "clear", 45: "insert",
+        16: "shift", 17: "ctrl", 18: "alt", 91: "command", 92: "command", 93: "command", 9: "tab", 20: "caps lock", 32: "spacebar", 8: "backspace", 13: "enter", 27: "esc",
+        46: "delete", 45: "insert", 144: "number lock", 145: "scroll lock", 12: "clear", 45: "insert",
+        19: "pause",
 
         // 功能键
         112: "f1", 113: "f2", 114: "f3", 115: "f4", 116: "f5", 117: "f6", 118: "f7", 119: "f8", 120: "f9", 121: "f10", 122: "f11", 123: "f12",
@@ -1128,7 +1131,6 @@
      */
     function keyString (event) {
         event = event || window.event;
-        console.log(event);
 
         let keycode = event.keyCode || event.which;
         let key = dictionary[keycode] || keycode;
@@ -1138,7 +1140,7 @@
             alt = event.altKey ? "alt+" : "",
             ctrl = event.ctrlKey ? "ctrl+" : "";
 
-        let resultKey = "";
+        let resultKey = "",preKey=ctrl + shift + alt;
 
         if (help_key.indexOf(key[0]) >= 0) {
             key[0] = key[1] = "";
@@ -1147,7 +1149,12 @@
         // 判断是否按下了caps lock
         let lockPress = event.code == "Key" + event.key && !shift;
 
-        resultKey = (ctrl + shift + alt + (lockPress ? key[1] : key[0])).replace(/\+$/, "") || 'ctrl';
+        // 只有字母（且没有按下功能Ctrl、shift或alt）区分大小写
+        resultKey = (preKey + ((preKey == '' && lockPress) ? key[1] : key[0]));
+
+        if(key[0]==""){
+            resultKey=resultKey.replace(/\+$/,'');
+        }
 
         return resultKey;
     }

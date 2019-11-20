@@ -5,14 +5,14 @@
 *
 * author 心叶
 *
-* version 0.3.3
+* version 0.3.5
 *
 * build Wed Aug 21 2019
 *
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Tue Nov 19 2019 23:25:32 GMT+0800 (GMT+08:00)
+* Date:Wed Nov 20 2019 10:42:46 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
@@ -1156,6 +1156,21 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     55: [7, '&'],
     56: [8, '*'],
     57: [9, '('],
+    96: [0, 0],
+    97: 1,
+    98: 2,
+    99: 3,
+    100: 4,
+    101: 5,
+    102: 6,
+    103: 7,
+    104: 8,
+    105: 9,
+    106: "*",
+    107: "+",
+    109: "-",
+    110: ".",
+    111: "/",
     // 字母
     65: ["a", "A"],
     66: ["b", "B"],
@@ -1196,20 +1211,21 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     16: "shift",
     17: "ctrl",
     18: "alt",
-    91: "command left",
-    93: "command right",
+    91: "command",
+    92: "command",
+    93: "command",
     9: "tab",
     20: "caps lock",
     32: "spacebar",
-    8: "delete",
+    8: "backspace",
     13: "enter",
     27: "esc",
     46: "delete",
     45: "insert",
     144: "number lock",
-    145: "screen lock",
+    145: "scroll lock",
     12: "clear"
-  }, _defineProperty(_dictionary, "45", "insert"), _defineProperty(_dictionary, 112, "f1"), _defineProperty(_dictionary, 113, "f2"), _defineProperty(_dictionary, 114, "f3"), _defineProperty(_dictionary, 115, "f4"), _defineProperty(_dictionary, 116, "f5"), _defineProperty(_dictionary, 117, "f6"), _defineProperty(_dictionary, 118, "f7"), _defineProperty(_dictionary, 119, "f8"), _defineProperty(_dictionary, 120, "f9"), _defineProperty(_dictionary, 121, "f10"), _defineProperty(_dictionary, 122, "f11"), _defineProperty(_dictionary, 123, "f12"), _defineProperty(_dictionary, 189, ["-", "_"]), _defineProperty(_dictionary, 187, ["=", "+"]), _defineProperty(_dictionary, 219, ["[", "{"]), _defineProperty(_dictionary, 221, ["]", "}"]), _defineProperty(_dictionary, 220, ["\\", "|"]), _defineProperty(_dictionary, 186, [";", ":"]), _defineProperty(_dictionary, 222, ["'", '"']), _defineProperty(_dictionary, 188, [",", "<"]), _defineProperty(_dictionary, 190, [".", ">"]), _defineProperty(_dictionary, 191, ["/", "?"]), _defineProperty(_dictionary, 192, ["`", "~"]), _dictionary); // 非独立键字典
+  }, _defineProperty(_dictionary, "45", "insert"), _defineProperty(_dictionary, 19, "pause"), _defineProperty(_dictionary, 112, "f1"), _defineProperty(_dictionary, 113, "f2"), _defineProperty(_dictionary, 114, "f3"), _defineProperty(_dictionary, 115, "f4"), _defineProperty(_dictionary, 116, "f5"), _defineProperty(_dictionary, 117, "f6"), _defineProperty(_dictionary, 118, "f7"), _defineProperty(_dictionary, 119, "f8"), _defineProperty(_dictionary, 120, "f9"), _defineProperty(_dictionary, 121, "f10"), _defineProperty(_dictionary, 122, "f11"), _defineProperty(_dictionary, 123, "f12"), _defineProperty(_dictionary, 189, ["-", "_"]), _defineProperty(_dictionary, 187, ["=", "+"]), _defineProperty(_dictionary, 219, ["[", "{"]), _defineProperty(_dictionary, 221, ["]", "}"]), _defineProperty(_dictionary, 220, ["\\", "|"]), _defineProperty(_dictionary, 186, [";", ":"]), _defineProperty(_dictionary, 222, ["'", '"']), _defineProperty(_dictionary, 188, [",", "<"]), _defineProperty(_dictionary, 190, [".", ">"]), _defineProperty(_dictionary, 191, ["/", "?"]), _defineProperty(_dictionary, 192, ["`", "~"]), _dictionary); // 非独立键字典
 
   var help_key = ["shift", "ctrl", "alt"];
   /**
@@ -1221,7 +1237,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   function keyString(event) {
     event = event || window.event;
-    console.log(event);
     var keycode = event.keyCode || event.which;
     var key = dictionary[keycode] || keycode;
     if (!key) return;
@@ -1229,15 +1244,22 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     var shift = event.shiftKey ? "shift+" : "",
         alt = event.altKey ? "alt+" : "",
         ctrl = event.ctrlKey ? "ctrl+" : "";
-    var resultKey = "";
+    var resultKey = "",
+        preKey = ctrl + shift + alt;
 
     if (help_key.indexOf(key[0]) >= 0) {
       key[0] = key[1] = "";
     } // 判断是否按下了caps lock
 
 
-    var lockPress = event.code == "Key" + event.key && !shift;
-    resultKey = (ctrl + shift + alt + (lockPress ? key[1] : key[0])).replace(/\+$/, "") || 'ctrl';
+    var lockPress = event.code == "Key" + event.key && !shift; // 只有字母（且没有按下功能Ctrl、shift或alt）区分大小写
+
+    resultKey = preKey + (preKey == '' && lockPress ? key[1] : key[0]);
+
+    if (key[0] == "") {
+      resultKey = resultKey.replace(/\+$/, '');
+    }
+
     return resultKey;
   }
   /**
