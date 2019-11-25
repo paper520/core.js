@@ -12,7 +12,7 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Wed Nov 20 2019 10:42:46 GMT+0800 (GMT+08:00)
+* Date:Mon Nov 25 2019 21:45:49 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
@@ -134,6 +134,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
   var concat = function concat(newArray, values) {
+    // 开头判断是为了复制切割类似字符串等这一类不应该分割的假数组
+    if (!isArraySpec(values)) {
+      return newArray.push(values);
+    }
+
     for (var i = 0; i < values.length; i++) {
       if (isArraySpec(values[i])) {
         if (values[i].length > 1) {
@@ -148,12 +153,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   };
 
   function concat$1() {
-    var newArray = [];
+    var values = [];
 
-    for (var _len = arguments.length, values = new Array(_len), _key = 0; _key < _len; _key++) {
-      values[_key] = arguments[_key];
+    for (var i = 0; i < arguments.length; i++) {
+      values.push(arguments[i]);
     }
 
+    var newArray = [];
     concat(newArray, values);
     return newArray;
   }

@@ -1,22 +1,26 @@
-QUnit.test('concat', 12, function () {
+QUnit.test('concat', 14, function () {
 
-    var temp1 = __.concat(1, [2, 3]);
-    equal(temp1.length, 3);
-    equal(temp1[0], 1);
-    equal(temp1[1], 2);
-    equal(temp1[2], 3);
+    deepEqual(__.concat(1, [2, 3]), [1, 2, 3]);
+    deepEqual(__.concat([], [[1, 2], 3], false, '字符串'), [1, 2, 3, false, '字符串']);
+    deepEqual(__.concat(), []);
+    deepEqual(__.concat([[1, 2, 3]]), [1, 2, 3]);
 
-    var temp2 = __.concat([], [[1, 2], 3], false, '字符串')
-    equal(temp2.length, 5);
-    equal(temp2[0], 1);
-    equal(temp2[1], 2);
-    equal(temp2[2], 3);
-    equal(temp2[3], false);
-    equal(temp2[4], '字符串');
+    // https://github.com/yelloxing/core.js/issues/6
 
-    equal(__.concat().length, 0);
+    deepEqual(__.concat(["123"]), ["123"]);
+    deepEqual(__.concat([["123"]]), ["123"]);
+    deepEqual(__.concat([[["123"]]]), ["123"]);
 
-    equal(__.concat([[1, 2, 3]]).length, 3);
+    deepEqual(__.concat([123]), [123]);
+    deepEqual(__.concat([[123]]), [123]);
+    deepEqual(__.concat([[[123]]]), [123]);
+
+    deepEqual(__.concat([123], 1), [123, 1]);
+    deepEqual(__.concat([["123"]], [], [1, [[[[3], 4]]]]), ["123", 1, 3, 4]);
+
+    deepEqual(__.concat([123], 1), [123, 1]);
+    deepEqual(__.concat([[123]], [], [1, [[[[3], 4]]]]), [123, 1, 3, 4]);
+
 });
 
 QUnit.test('indexOf', 3, function () {
@@ -39,20 +43,10 @@ QUnit.test('lastIndexOf', 3, function () {
 
 });
 
-QUnit.test('unique', 7, function () {
+QUnit.test('unique', 3, function () {
 
-
-    var temp1 = __.unique([1, 2, 3, 2])
-    equal(temp1.length, 3);
-    equal(temp1[0], 1);
-    equal(temp1[1], 2);
-    equal(temp1[2], 3);
-
-    var temp2 = __.unique([])
-    equal(temp2.length, 0);
-
-    var temp3 = __.unique([3])
-    equal(temp3.length, 1);
-    equal(temp3[0], 3);
+    deepEqual(__.unique([1, 2, 3, 2]), [1, 2, 3]);
+    deepEqual(__.unique([]), []);
+    deepEqual(__.unique([3]), [3]);
 
 });

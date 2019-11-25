@@ -22,6 +22,12 @@ import isArraySpec from './.inside/isArraySpec';
  * // => []
  */
 let concat = function (newArray, values) {
+
+    // 开头判断是为了复制切割类似字符串等这一类不应该分割的假数组
+    if (!isArraySpec(values)) {
+        return newArray.push(values);
+    }
+
     for (let i = 0; i < values.length; i++) {
         if (isArraySpec(values[i])) {
             if (values[i].length > 1) {
@@ -35,7 +41,12 @@ let concat = function (newArray, values) {
     }
 };
 
-export default function (...values) {
+export default function () {
+
+    let values = [];
+    for (let i = 0; i < arguments.length; i++) {
+        values.push(arguments[i]);
+    }
 
     let newArray = [];
     concat(newArray, values);

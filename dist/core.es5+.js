@@ -12,7 +12,7 @@
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Wed Nov 20 2019 10:42:46 GMT+0800 (GMT+08:00)
+* Date:Mon Nov 25 2019 21:45:49 GMT+0800 (GMT+08:00)
 */
 
 (function () {
@@ -116,6 +116,12 @@
      * // => []
      */
     let concat = function (newArray, values) {
+
+        // 开头判断是为了复制切割类似字符串等这一类不应该分割的假数组
+        if (!isArraySpec(values)) {
+            return newArray.push(values);
+        }
+
         for (let i = 0; i < values.length; i++) {
             if (isArraySpec(values[i])) {
                 if (values[i].length > 1) {
@@ -129,7 +135,12 @@
         }
     };
 
-    function concat$1 (...values) {
+    function concat$1 () {
+
+        let values = [];
+        for (let i = 0; i < arguments.length; i++) {
+            values.push(arguments[i]);
+        }
 
         let newArray = [];
         concat(newArray, values);
