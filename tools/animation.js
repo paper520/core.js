@@ -41,7 +41,7 @@ export default function (doback, duration, callback) {
         //开启唯一的定时器timerId
         "start": function () {
             if (!$timerId) {
-                $timerId = window.setInterval(clock.tick, $interval);
+                $timerId = setInterval(clock.tick, $interval);
             }
         },
 
@@ -82,7 +82,7 @@ export default function (doback, duration, callback) {
         //停止定时器，重置timerId=null
         "stop": function () {
             if ($timerId) {
-                window.clearInterval($timerId);
+                clearInterval($timerId);
                 $timerId = null;
             }
         }

@@ -5,14 +5,14 @@
 *
 * author 心叶
 *
-* version 0.3.6
+* version 0.3.7
 *
 * build Wed Aug 21 2019
 *
 * Copyright yelloxing
 * Released under the MIT license
 *
-* Date:Mon Nov 25 2019 21:49:03 GMT+0800 (GMT+08:00)
+* Date:Thu Dec 12 2019 16:14:55 GMT+0800 (GMT+08:00)
 */
 
 "use strict";
@@ -1000,7 +1000,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       //开启唯一的定时器timerId
       "start": function start() {
         if (!$timerId) {
-          $timerId = window.setInterval(clock.tick, $interval);
+          $timerId = setInterval(clock.tick, $interval);
         }
       },
       //被定时器调用，遍历timers堆栈
@@ -1043,7 +1043,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       //停止定时器，重置timerId=null
       "stop": function stop() {
         if ($timerId) {
-          window.clearInterval($timerId);
+          clearInterval($timerId);
           $timerId = null;
         }
       }
