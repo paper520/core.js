@@ -1,4 +1,4 @@
-import isArrayLike from './.inside/isArrayLike';
+import isArraySpec from './.inside/isArraySpec';
 import eq from './eq';
 
 /**
@@ -15,7 +15,7 @@ import eq from './eq';
  */
 export default function (array) {
 
-    if (!isArrayLike(array)) {
+    if (!isArraySpec(array)) {
         return array;
     }
 

@@ -1,3 +1,16 @@
+QUnit.test('isArray', 8, function () {
+
+    equal(__.isArray([]), true);
+    equal(__.isArray(new Array()), true);
+    equal(__.isArray(true), false);
+    equal(__.isArray("字符串"), false);
+    equal(__.isArray(null), false);
+    equal(__.isArray(undefined), false);
+    equal(__.isArray(document.getElementsByTagName("div")), false);
+    equal(__.isArray(document.getElementsByTagName("div"), true), true);
+
+});
+
 QUnit.test('isBoolean', 6, function () {
 
     equal(__.isBoolean(false), true);

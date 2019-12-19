@@ -24,8 +24,7 @@
     <div class="header">
         <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>
             @yelloxing/core.js</h2>
-        JavaScript工具库
-        |
+        JavaScript工具库 |
         <a href="../index.html">查看核心</a>
     </div>
     <div class="menu">
@@ -33,10 +32,11 @@
         <h5 onclick='toItem("animation")'>动画Animation</h5>
         <h5 onclick='toItem("tree")'>基本树布局</h5>
         <h5 onclick='toItem("hermite")'>Hermite三次插值</h5>
+        <h5 onclick='toItem("keyString")'>键盘按键组合</h5>
     </div>
     <div class="tools-content" id='content'>
         <div class="banner">
-            本文档用于说明一些核心工具，这些工具和核心接口不一样，打包的时候没有包含进去，你可以只引入对应的接口，这样可以大大减小文件大小。
+            本文档用于说明一些核心工具，除了通过__.XXX()的方式调用，你也可以只引入对应的接口，这样可以大大减小文件大小。
         </div>
 
         <h2 class="title" id='Matrix4'>Matrix4三维坐标变换</h2>
@@ -132,7 +132,7 @@
         </p>
         <pre class="code prettyprint lang-js">var resultData=treeObj(data);</pre>
         <p>
-        resultData是计算后带有结点坐标的数据，格式如下：
+            resultData是计算后带有结点坐标的数据，格式如下：
         </p>
         <pre class="code prettyprint lang-js">{node: {
     "XXX":{
@@ -178,6 +178,15 @@
             经过上面的设置，插值对象就可以求值了。比如x=a，其中a在需要插值的点之间（边界也可以），你可以这样求解出y值：
         </p>
         <pre class="code prettyprint lang-js">var y=hermite(a);</pre>
+        <h2 class="title" id='keyString'>键盘按键组合</h2>
+        <pre class="npm-code prettyprint lang-js">import keyString from '@yelloxing/core.js/tools/keyString';</pre>
+        <p>
+            用于把键盘此刻按下的键以一种特定的组合顺序组合成一个完整的字符串返回：
+        </p>
+        <pre class="code prettyprint lang-html">&lt;body onkeydown="keydown()"&gt;&lt;/body&gt;</pre>
+        <pre class="code prettyprint lang-js">function keydown(event) {
+    console.log("此刻按下的快捷键是:" + keyString(event));
+}</pre>
     </div>
 
 </body>

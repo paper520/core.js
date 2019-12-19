@@ -15,14 +15,42 @@
     <link rel="stylesheet" href="./plugins/prettify.css">
     <script src="./plugins/prettify.js"></script>
     <script src="./libs/script.js"></script>
+    <script>
+
+        // 具体的通知内容
+        function doNotify() {
+            var notification = new Notification('重要通知', {
+                body: "v0.3.0之后的版本才把核心工具打包到core.js中！",
+                icon: "./logo.png"
+            });
+            setTimeout(function () { notification.close(); }, 5000);
+        }
+
+        // 通知一些重要事情
+        function notify() {
+            if (window.Notification) {
+                if (window.Notification.permission == "granted") {
+                    doNotify();
+                } else {
+                    window.Notification.requestPermission(function (permission) {
+                        if (permission == 'granted') {
+                            doNotify();
+                        }
+                    });
+                }
+            }
+        }
+
+    </script>
 </head>
 
-<body onload="prettyPrint();adjustScroll();initMenus();">
+<body onload="prettyPrint();adjustScroll();initMenus();notify()">
     <a href="https://github.com/yelloxing/core.js" class="github" target="_blank">
         Fork me on Github
     </a>
     <div class="header">
-        <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>@yelloxing/core.js</h2>
+        <h2 onclick='window.location.href="https://github.com/yelloxing/core.js"' style='cursor:pointer'>
+            @yelloxing/core.js</h2>
         JavaScript核心接口 |
         <a href="./tools-api/index.html">查看工具</a>
     </div>
@@ -44,6 +72,7 @@
             <h4 onclick='togger(this)'>Lang</h4>
             <ul>
                 <li onclick='toItem("eq")'>__.eq</li>
+                <li onclick='toItem("isArray")'>__.isArray</li>
                 <li onclick='toItem("isBoolean")'>__.isBoolean</li>
                 <li onclick='toItem("isElement")'>__.isElement</li>
                 <li onclick='toItem("isError")'>__.isError</li>
@@ -59,10 +88,23 @@
             </ul>
         </div>
         <div name='menu-frame'>
+            <h4 onclick='togger(this)'>Math</h4>
+            <ul>
+                <li onclick='toItem("max")'>__.max</li>
+                <li onclick='toItem("min")'>__.min</li>
+            </ul>
+        </div>
+        <div name='menu-frame'>
             <h4 onclick='togger(this)'>Object</h4>
             <ul>
                 <li onclick='toItem("get")'>__.get</li>
                 <li onclick='toItem("set")'>__.set</li>
+            </ul>
+        </div>
+        <div name='menu-frame'>
+            <h4 onclick='togger(this)'>String</h4>
+            <ul>
+                <li onclick='toItem("split")'>__.split</li>
             </ul>
         </div>
     </div>
@@ -124,7 +166,8 @@
                 <em>(number)</em>: 返回 值value在数组中的索引位置, 没有找到为返回-1。
             </li>
         </ul>
-        <pre class='prettyprint lang-js' id='lastIndexOf'>__.lastIndexOf(array, value[, fromIndex=array.length-1]);</pre>
+        <pre class='prettyprint lang-js'
+            id='lastIndexOf'>__.lastIndexOf(array, value[, fromIndex=array.length-1]);</pre>
         <p>
             使用
             <a href="javascript:void(0)" onclick='toItem("eq")'>__.eq</a> 等值比较，从右到左遍历array，返回首次 value 在数组array中被找到的 索引值。
@@ -184,7 +227,8 @@
         <pre class='prettyprint lang-js' id='eq'>__.eq(value, other);</pre>
         <p>
             比较两者的值，来确定它们是否相等(这里遵循
-            <a href='http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero' target="_blank">SameValueZero</a>规则)。
+            <a href='http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero'
+                target="_blank">SameValueZero</a>规则)。
         </p>
         <h5>开始版本</h5>
         <ul>
@@ -207,6 +251,33 @@
         <ul>
             <li>
                 <em>(boolean)</em>: 如果两个值相等返回 true ，否则返回 false 。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='isArray'>__.isArray(value[, notStrict]);</pre>
+        <p>
+            检查 value 是否是原始 数组 类型或广泛的数组。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.3.1</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>value (*)</em>: 要检查的值。
+            </li>
+            <li>
+                <em>notStrict (boolean)</em>: 是否不需要严格类型检测，默认false表示需要。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(boolean)</em>: 如果 value 为一个数组（notStrict为true时是更广泛的数组类型），那么返回 true，否则返回 false。
             </li>
         </ul>
         <pre class='prettyprint lang-js' id='isBoolean'>__.isBoolean(value);</pre>
@@ -500,8 +571,55 @@
                 <em>(string)</em>:返回转换后的字符串。
             </li>
         </ul>
+        <h4>”Math“ 方法</h4>
+        <pre class='prettyprint lang-js' id='max'>__.max(array[, valback]);</pre>
+        <p>
+            计算 array 中的最大值。 如果 array 不是数组，空的或者假值将会返回 undefined。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.4</li>
+        </ul>
+        <h5>参数</h5>
+        <ul>
+            <li>
+                <em>array (Array)</em>: 要迭代的数组。
+            </li>
+            <li>
+                <em>valback (Function)</em>: 可修改比较值的函数，可选。
+            </li>
+        </ul>
+        <h5>返回</h5>
+        <ul>
+            <li>
+                <em>(*)</em>: 返回最大值（即使传递函数修改比较值，返回的依旧是原始值）。
+            </li>
+        </ul>
+        <pre class='prettyprint lang-js' id='min'>__.min(array[, valback]);</pre>
+        <p>
+            计算 array 中的最小值。 如果 array 不是数组，空的或者假值将会返回 undefined。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.4</li>
+        </ul>
+        <h5>参数</h5>
+        <ul>
+            <li>
+                <em>array (Array)</em>: 要迭代的数组。
+            </li>
+            <li>
+                <em>valback (Function)</em>: 可修改比较值的函数，可选。
+            </li>
+        </ul>
+        <h5>返回</h5>
+        <ul>
+            <li>
+                <em>(*)</em>: 返回最小值（即使传递函数修改比较值，返回的依旧是原始值）。
+            </li>
+        </ul>
         <h4>”Object“ 方法</h4>
-        <pre class='prettyprint lang-js' id='get'>__.get(object, path, [defaultValue]);</pre>
+        <pre class='prettyprint lang-js' id='get'>__.get(object, path[, defaultValue]);</pre>
         <p>
             根据 object对象的path路径获取值。 如果解析 value 是 undefined 会以 defaultValue 取代。
         </p>
@@ -528,9 +646,10 @@
                 <em>(*)</em>: 返回解析的值。
             </li>
         </ul>
-        <pre class='prettyprint lang-js' id='set'>__.set(object, path, value, [customizer]);</pre>
+        <pre class='prettyprint lang-js' id='set'>__.set(object, path, value[, customizer]);</pre>
         <p>
-            设置 object对象中对应 path 属性路径上的值，如果path不存在，则创建。它接受一个 customizer，调用生成对象的 path。 如果 customizer 返回 undefined 将会使用{}代替。customizer 调用3个参数：
+            设置 object对象中对应 path 属性路径上的值，如果path不存在，则创建。它接受一个 customizer，调用生成对象的 path。 如果 customizer 返回 undefined
+            将会使用{}代替。customizer 调用3个参数：
             (nsValue, key, nsObject)。
         </p>
         <p class='warn'>
@@ -563,6 +682,34 @@
         <ul>
             <li>
                 <em>(Object)</em>: 返回 object。
+            </li>
+        </ul>
+        <h4>”String“ 方法</h4>
+        <pre class='prettyprint lang-js' id='split'>__.split(str, splitStr);</pre>
+        <p>
+            创建一个新数组，使用指定字符切割字符串保存其中。
+        </p>
+        <h5>开始版本</h5>
+        <ul>
+            <li>0.2.3</li>
+        </ul>
+        <h5>
+            参数
+        </h5>
+        <ul>
+            <li>
+                <em>str (string)</em>: 切割的字符串（如果不是字符串，会先被转成字符串）。
+            </li>
+            <li>
+                <em>splitStr (*)</em>: 割符号。
+            </li>
+        </ul>
+        <h5>
+            返回
+        </h5>
+        <ul>
+            <li>
+                <em>(Array)</em>: 返回切割后的数组。
             </li>
         </ul>
     </div>

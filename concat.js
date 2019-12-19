@@ -1,5 +1,4 @@
-import isArrayLike from './.inside/isArrayLike';
-import isString from './isString';
+import isArraySpec from './.inside/isArraySpec';
 
 /**
  * 创建一个新数组，把传递的数组或值拼接起来。
@@ -23,14 +22,18 @@ import isString from './isString';
  * // => []
  */
 let concat = function (newArray, values) {
+
+    // 开头判断是为了复制切割类似字符串等这一类不应该分割的假数组
+    if (!isArraySpec(values)) {
+        return newArray.push(values);
+    }
+
     for (let i = 0; i < values.length; i++) {
-        if (isArrayLike(values[i]) &&
-            // 字符串比较特殊，我们不希望别划分
-            !isString(values[i])) {
+        if (isArraySpec(values[i])) {
             if (values[i].length > 1) {
                 concat(newArray, values[i]);
             } else if (values[i].length === 1) {
-                newArray.push(values[i][0]);
+                concat(newArray, values[i][0]);
             }
         } else {
             newArray.push(values[i]);
@@ -38,7 +41,12 @@ let concat = function (newArray, values) {
     }
 };
 
-export default function (...values) {
+export default function () {
+
+    let values = [];
+    for (let i = 0; i < arguments.length; i++) {
+        values.push(arguments[i]);
+    }
 
     let newArray = [];
     concat(newArray, values);

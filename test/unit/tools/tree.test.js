@@ -1,6 +1,6 @@
 QUnit.test('tree', 14, function () {
 
-    var data = __tools.tree({
+    var data = __.tree({
         "root": function (initTree) {
             return initTree[0];
         },

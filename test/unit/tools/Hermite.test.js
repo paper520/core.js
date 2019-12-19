@@ -1,6 +1,6 @@
 QUnit.test('Hermite y=x(3次方)+1', 4, function () {
 
-    var interpolate = __tools.Hermite({
+    var interpolate = __.Hermite({
         // 使用斜率不调整的Hermite插值法求出回归曲线
         "u": 1
     }).setP(0, 1, 3, 28, 0, 27);

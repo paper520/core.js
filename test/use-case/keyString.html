@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="../../docs/logo.png">
+    <script src="./script.js"></script>
+    <script src="../../dist/core.js"></script>
+    <title>用例测试 | core.js</title>
+    <script>
+        function keydown(event) {
+            event = event || window.event;
+            window.__helps.stopPropagation(event);
+            window.__helps.preventDefault(event);
+            console.log(event.keyCode || event.which);
+            document.getElementById('text').innerText = "此刻按下的按键是:" + __.keyString(event);
+        }
+    </script>
+</head>
+
+<body onkeydown="keydown()">
+    <div id='text'>
+        温馨提示：请随意按下键盘中的一个或若干个键！
+    </div>
+</body>
+
+</html>
